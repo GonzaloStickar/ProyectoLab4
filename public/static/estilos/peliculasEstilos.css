@@ -1,0 +1,53 @@
+* {
+    padding:0;
+    margin: 0;
+    font-family:'Franklin Gothic Medium', 'Verdana', Arial, sans-serif;
+}
+
+.articulos {
+    display:flex;
+    align-items:center;
+    justify-content: space-evenly;
+    flex-wrap:wrap;
+  }
+  
+  .articulos div {
+      position:relative;
+      display:flex;
+      display:inline-block;
+      justify-items: auto;
+      margin:20px;
+  }
+  
+  .articulos div p {
+      text-align: center;
+      color: black;
+      background-color: aliceblue;
+      bottom:1.25%;
+      width: 215px;
+      height:25px;
+  }
+
+  .articulos h1 {
+    color:white;
+    font-family: 'Times New Roman', Times, serif;
+    position: relative;
+    z-index: 1;
+    margin-top: 125px;
+    font-size: 75px;
+    text-shadow: 0.1em 0.1em 0.1em rgba(0, 0, 0, 0.729);
+  }
+
+  .nombre-pelicula {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 5px;
+    margin: 0;
+    font-weight: bold;
+}
+
+p {
+    color:aqua;
+}

@@ -1,0 +1,502 @@
+[
+    {
+        "id": "77e5d1fc7d75536030a56f91553c2e16a8204a8d71021504d791c1d1d11d4dfe",
+        "nombre": "Contratiempo",
+        "anio": 2017,
+        "fecha_estreno": "10 de agosto",
+        "director": "Oriol Paulo",
+        "img": "https://pics.filmaffinity.com/Contratiempo-621094614-large.jpg",
+        "genero": "Crimen",
+        "sinopsis": "La vida del exitoso empresario Adri\u00e1n Doria se vuelve una pesadilla cuando una ma\u00f1ana se despierta en una habitaci\u00f3n de hotel junto al cad\u00e1ver de su amante. \u00c9l est\u00e1 convencido de su inocencia, pero las pruebas demuestran lo contrario. Despu\u00e9s de que su esposa lo abandone, Adri\u00e1n contrata los servicios de Virginia Goodman, la mejor preparadora de testigos del pa\u00eds. Asesora y cliente deber\u00e1n trabajar para encontrar la manera de demostrar la inocencia de Adri\u00e1n."
+    },
+    {
+        "id": "57dd41ee1714e7f841ec9c43bfca86d557e22a78ef08ae3891baa27c27daccfc",
+        "nombre": "Fast & Furious 11",
+        "anio": 2024,
+        "fecha_estreno": "Mes de febrero de 2024",
+        "director": "Justin Lin",
+        "img": "https://elsol-compress-release.s3-accelerate.amazonaws.com/images/large/1603280047273Fast-furious.jpg",
+        "genero": "Acci\u00f3n",
+        "sinopsis": "Esta nueva y \u00faltima pel\u00edcula sobre la popular saga de carreras ilegales y coches tuneados, es el broche final de la franquicia. Justin Lin es el encargado de dirigir este largometraje, que repite como realizador de Fast & Furious tras haberse encargado de la tercera, cuarta, quinta y sexta entregas."
+    },
+    {
+        "id": "2a39ffe99a08690e4624329bdcc40362c42129591fbfcf27bdcd69883fab72ae",
+        "nombre": "C\u00f3mo Entrenar a tu Drag\u00f3n 4",
+        "anio": 2022,
+        "fecha_estreno": "Comienzos de 2024",
+        "director": "Chris Sanders, Dean DeBlois",
+        "img": "https://i.ytimg.com/vi/d_DPO9RJfdo/maxresdefault.jpg",
+        "genero": "Animaci\u00f3n",
+        "sinopsis": "Pronto, un grupo de ni\u00f1os inadaptados, llevados al sitio por sus padres, descubre la verdad sobre los dragones y d\u00f3nde se han estado escondiendo, un secreto que deben guardar para s\u00ed mismos para proteger lo que han descubierto."
+    },
+    {
+        "id": "ac798c6ab10131fb5fcc486043743082eee2fda5ebf43375473cb999e7b9eed1",
+        "nombre": "Dream House",
+        "anio": 2011,
+        "fecha_estreno": "13 de octubre",
+        "director": "Jim Sheridan",
+        "img": "https://cl.buscafs.com/www.tomatazos.com/public/uploads/images/63112/63112_800x1183.jpg",
+        "genero": "Drama",
+        "sinopsis": "El publicista Will Atenton deja un lucrativo trabajo en Nueva York para mudarse con su esposa, Libby, y sus hijas a una pintoresca ciudad de Nueva Inglaterra. Sin embargo, mientras se adaptan a su casa, los Atenton descubren que una mujer y sus hijas fueron asesinadas ah\u00ed, y el marido sobreviviente es el principal sospechoso. Con la ayuda de una vecina, cercana a la familia asesinada, Will empieza a develar una verdad aterradora."
+    },
+    {
+        "id": "7557a62f6370810e79b92274864df7a5ec3f8aa9db2fadc03f0bf6bf3ce68fde",
+        "nombre": "Capit\u00e1n Am\u00e9rica: Civil War",
+        "anio": 2016,
+        "fecha_estreno": "5 de mayo",
+        "director": "Joe Russo, Anthony Russo",
+        "img": "https://es.web.img3.acsta.net/pictures/16/03/14/17/21/324829.jpg",
+        "genero": "Acci\u00f3n",
+        "sinopsis": "Mientras intentan detener a Rumlow en Lagos, Capit\u00e1n Am\u00e9rica, Falcon, Viuda Negra y Bruja Escarlata se ven obligados a realizar una intervenci\u00f3n para evitar el robo de una muestra letal en el Instituto de Enfermedades Infecciosas."
+    },
+    {
+        "id": "a671dceaacce8dd159defb38aa0aa3c3807aae9f7b96461a9c77420910b4f72c",
+        "nombre": "Hasta el \u00faltimo hombre",
+        "anio": 2016,
+        "fecha_estreno": "16 de octubre",
+        "director": "Mel Gibson",
+        "img": "https://pics.filmaffinity.com/Hasta_el_ltimo_hombre-205606610-large.jpg",
+        "genero": "Guerra, Drama",
+        "sinopsis": "Esta es la historia de Desmond T. Doss, un hombre contrario a la violencia que combati\u00f3 como m\u00e9dico en la Segunda Guerra Mundial sin portar un arma. No dispar\u00f3 ni una bala, pero salv\u00f3 a 75 personas de la muerte en la batalla de la isla de Okinawa. Gracias a su coraje, pas\u00f3 de ser el objeto de las burlas de sus compa\u00f1eros a ser reconocido por su enorme val\u00eda con la entrega de la Medalla de Honor del Congreso, otorgada por primera vez a un objetor de conciencia."
+    },
+    {
+        "id": "cc79c634b559dd8f9de744c18c3c8346a0a2dedd97fac4d001eed43fa6d36d49",
+        "nombre": "Bones and All",
+        "anio": 2022,
+        "fecha_estreno": "25 de noviembre",
+        "director": "Luca Guadagnino",
+        "img": "https://es.web.img3.acsta.net/c_310_420/pictures/22/10/25/11/36/5739431.jpg",
+        "genero": "Drama",
+        "sinopsis": "El amor florece entre una joven marginada de la sociedad y un vagabundo sin derechos cuando se embarcan en una odisea de 3.000 millas a trav\u00e9s de las carreteras secundarias de Am\u00e9rica."
+    },
+    {
+        "id": "02134a2acf77a943fe22ebf97b6b833fdf561579f096db5582b44fd07852c555",
+        "nombre": "Pu\u00f1ales por la espalda 2",
+        "anio": 2022,
+        "fecha_estreno": "23 de diciembre",
+        "director": "Rian Johnson",
+        "img": "https://www.lahiguera.net/cinemania/pelicula/9218/punales_por_la_espalda-cartel-9156.jpg",
+        "genero": "Drama, Crimen",
+        "sinopsis": "El multimillonario tecnol\u00f3gico Miles Bron invita a sus amigos a una escapada a su isla griega privada. Cuando alguien aparece muerto, el detective Benoit Blanc se hace cargo del caso."
+    },
+    {
+        "id": "b19a1d5c7e4a132d2cb597811323848f6a61a929b49c993f5b75f58f5e141602",
+        "nombre": "Black Panther: Wakanda Forever",
+        "anio": 2022,
+        "fecha_estreno": "11 de noviembre",
+        "director": "Ryan Coogler",
+        "img": "https://i0.wp.com/imgs.hipertextual.com/wp-content/uploads/2022/07/Black-Panther-Wakanda-Forever-Afiche.jpg",
+        "genero": "Acci\u00f3n",
+        "sinopsis": "Una secuela que seguir\u00e1 explorando el incomparable mundo de Wakanda y todos los ricos y variados personajes presentados en la pel\u00edcula de 2018."
+    },
+    {
+        "id": "41ee92cad8880d5334e3eb6a4892118cec8143ea225b6cd0241d8dd8de7a6d8c",
+        "nombre": "As bestas",
+        "anio": 2022,
+        "fecha_estreno": "11 de noviembre",
+        "director": "Rodrigo Sorogoyen",
+        "img": "https://pics.filmaffinity.com/As_bestas-275688233-large.jpg",
+        "genero": "Suspenso",
+        "sinopsis": "Una pareja francesa de mediana edad llega a vivir a un pueblo gallego en busca de una mayor cercan\u00eda con la naturaleza. Su presencia, sin embargo, despierta la hostilidad de dos lugare\u00f1os."
+    },
+    {
+        "id": "4860f2059613bc2e73cf102f4704943e2839e967d007caa2b32b45cb5e22c1c0",
+        "nombre": "El agua",
+        "anio": 2022,
+        "fecha_estreno": "28 de octubre",
+        "director": "Elena L\u00f3pez Riera",
+        "img": "https://pics.filmaffinity.com/El_agua-949205065-large.jpg",
+        "genero": "Drama",
+        "sinopsis": "Ana tiene 17 a\u00f1os; vive con su madre y su abuela en Orihuela. Sus d\u00edas transcurren entre amigos, el primer amor, el trabajo en el bar, el temor a las riadas y unas ansias indisimuladas de escapar y buscar un horizonte m\u00e1s amplio."
+    },
+    {
+        "id": "3a6c7e81f9b86a4e7929fe406922db2d5194bd3c9c3f24db7e00c7c2da01e28b",
+        "nombre": "Amsterdam",
+        "anio": 2022,
+        "fecha_estreno": "28 de octubre",
+        "director": "David Owen Russell",
+        "img": "https://pics.filmaffinity.com/msterdam-212094748-large.jpg",
+        "genero": "Historia, Drama, Crimen, Suspenso",
+        "sinopsis": "En la d\u00e9cada de 1930, tres amigos que presencian un asesinato se convierten en sospechosos del mismo. La investigaci\u00f3n que emprenden los lleva a descubrir una de las conspiraciones m\u00e1s asombrosas de la historia estadounidense."
+    },
+    {
+        "id": "aef86f5811afb298bce367b7ca6b463030475a448dff53bcdbd92196cced00ab",
+        "nombre": "El cuarto pasajero",
+        "anio": 2022,
+        "fecha_estreno": "28 de octubre",
+        "director": "\u00c1lex de la Iglesia",
+        "img": "https://pics.filmaffinity.com/El_cuarto_pasajero-401262495-large.jpg",
+        "genero": "Comedia",
+        "sinopsis": "Juli\u00e1n (Alberto San Juan), un divorciado de 50 a\u00f1os con problemas econ\u00f3micos, recurre a una aplicaci\u00f3n para compartir su coche con desconocidos y, en especial, con alguien que ya no lo es tanto: Lorena (Blanca Su\u00e1rez), una joven que viaja a menudo a Madrid."
+    },
+    {
+        "id": "03bca1d8c3ea893cda3cfe52076854f7c9c2686778741c8c77b26e6aab736e1b",
+        "nombre": "Black Adam",
+        "anio": 2022,
+        "fecha_estreno": "21 de octubre",
+        "director": "Jaume Collet-Serra",
+        "img": "https://es.web.img2.acsta.net/pictures/22/10/07/16/48/1142280.jpg",
+        "genero": "Acci\u00f3n",
+        "sinopsis": "La cinta cuenta la historia de Teth Adam, un supervillano y antih\u00e9roe ficticio, que tiene poderes gracias a los dioses; sin embargo, debido a que los utiliz\u00f3 de forma inadecuada fue encarcelado y debido a ello se convierte en Black Adam."
+    },
+    {
+        "id": "70a8bfd38be350107837aa4d6cc4749e8d98ae3cdc4d7d3063fdc0361f635266",
+        "nombre": "Un a\u00f1o, una noche",
+        "anio": 2022,
+        "fecha_estreno": "21 de octubre",
+        "director": "Isaki Lacuesta",
+        "img": "https://pics.filmaffinity.com/Un_a_o_una_noche-479171405-large.jpg",
+        "genero": "Drama, Narrativa",
+        "sinopsis": "Ram\u00f3n y C\u00e9line son una joven pareja que se encuentra en el local Bataclan de Par\u00eds la noche del 13 de noviembre de 2015. Durante el asalto terrorista, ambos logran, cada uno por su lado, entrar en el camerino de los m\u00fasicos y refugiarse all\u00ed. Al salir ya no son los mismos."
+    },
+    {
+        "id": "d4f8b59ead9ee66f840546a39e22a3b3abf77e36bc35b7cade68f55306f4219c",
+        "nombre": "Peter von Kant",
+        "anio": 2022,
+        "fecha_estreno": "14 de octubre",
+        "director": "Francois Ozon",
+        "img": "https://pics.filmaffinity.com/Peter_von_Kant-839316990-large.jpg",
+        "genero": "Drama, Ficci\u00f3n",
+        "sinopsis": "Peter Von Kant, un famoso director de \u00e9xito, vive con su asistente Karl, al que maltrata y humilla. Gracias a la gran actriz Sidonie, conoce y se enamora de Amir, un apuesto joven de origen modesto, a quien ofrece compartir su casa y apoyarle para entrar en el mundo del cine."
+    },
+    {
+        "id": "90c95fb041c43bab178eec41e91bd93da8ab733a60fc647f9ca15f2f0a5975e5",
+        "nombre": "Halloween: El final",
+        "anio": 2022,
+        "fecha_estreno": "14 de octubre",
+        "director": "David Gordon Green",
+        "img": "https://es.web.img3.acsta.net/pictures/22/09/27/18/12/3710392.jpg",
+        "genero": "Terror",
+        "sinopsis": "Cuatro a\u00f1os despu\u00e9s de la desaparici\u00f3n de Michael Myers, el joven Corey lo encuentra maltrecho en las alcantarillas. Poco a poco, se establece un extra\u00f1o v\u00ednculo entre estos dos personajes unidos por la venganza y la locura."
+    },
+    {
+        "id": "13a112ba55cb308103b015c6a359181c99ea778d5d0b9b1ca2070ffbdb2ce0bd",
+        "nombre": "Cerdita",
+        "anio": 2022,
+        "fecha_estreno": "14 de octubre",
+        "director": "Carlota Mart\u00ednez Pereda, Carlota Pereda",
+        "img": "https://pics.filmaffinity.com/Cerdita-480760611-large.jpg",
+        "genero": "Aventura, Drama",
+        "sinopsis": "Sara es una adolescente con sobrepeso que es testigo de c\u00f3mo un desconocido secuestra a un grupo de chicas que la acosan habitualmente. Cuando la polic\u00eda comienza a hacer preguntas, Sara decide mantener silencio."
+    },
+    {
+        "id": "7e3abd5f7992b8466be7d0aaf0d376b36e6284d9cb9245db3c180db69e6abba0",
+        "nombre": "Girasoles silvestres",
+        "anio": 2022,
+        "fecha_estreno": "14 de octubre",
+        "director": "Jaime Rosales",
+        "img": "https://pics.filmaffinity.com/Girasoles_silvestres-279066298-large.jpg",
+        "genero": "Drama",
+        "sinopsis": "Julia es una joven de 22 a\u00f1os y madre de dos ni\u00f1os que se enamora de \u00d3scar, con el que inicia una relaci\u00f3n intensa y tortuosa. Julia empieza a dudar sobre la conveniencia de \u00d3scar como modelo masculino para sus hijos. Un incidente dar\u00e1 lugar a una huida hacia delante en busca de un futuro mejor."
+    },
+    {
+        "id": "0823e40de0e3f02a1e0e3af0b51c8dd9b4e973ad9fd68bb7e6ac6e3afd785f4e",
+        "nombre": "Los renglones torcidos de Dios",
+        "anio": 2022,
+        "fecha_estreno": "7 de octubre",
+        "director": "Oriol Paulo",
+        "img": "https://pics.filmaffinity.com/Los_renglones_torcidos_de_Dios-670212742-large.jpg",
+        "genero": "Drama",
+        "sinopsis": "Alice, investigadora privada, ingresa en un hospital psiqui\u00e1trico simulando una paranoia. Su objetivo es recabar pruebas del caso en el que trabaja: la muerte de un interno en circunstancias poco claras."
+    },
+    {
+        "id": "a6643f86ea46858efa71c3c6d117d2164cae662bbca0be8788337e2a2963440b",
+        "nombre": "En los m\u00e1rgenes",
+        "anio": 2022,
+        "fecha_estreno": "7 de octubre",
+        "director": "Juan Diego Botto",
+        "img": "https://pics.filmaffinity.com/En_los_m_rgenes-722944196-large.jpg",
+        "genero": "Suspenso, Drama",
+        "sinopsis": "Rafa, un abogado laboral, pasa un d\u00eda infernal intentando ayudar a un inmigrante que va a perder la custodia de su hija y una mujer a la que van a desahuciar. Sus historias se entrelazan con la de Germ\u00e1n, un empresario arruinado."
+    },
+    {
+        "id": "8604251a886b483eada36a144e39a4777f6c1a054bc166aae998c0bb930cf1fb",
+        "nombre": "Argentina 1985",
+        "anio": 2022,
+        "fecha_estreno": "29 de septiembre",
+        "director": "Santiago Mitre",
+        "img": "https://www.analisisdigital.com.ar/sites/default/files/styles/noticias_front_desktop/public/imagenNoticiaDigital/argentina_1985.jpg",
+        "genero": "Drama",
+        "sinopsis": "Durante la d\u00e9cada de 1980, un grupo de abogados investiga y lleva a juicio a los responsables de la dictadura c\u00edvico-militar argentina."
+    },
+    {
+        "id": "6786a9eb86a75a7c217d3e0317930cbae57b2240138212b1d075688c20912675",
+        "nombre": "Modelo 77",
+        "anio": 2022,
+        "fecha_estreno": "23 de septiembre",
+        "director": "Alberto Rodr\u00edguez Librero",
+        "img": "https://pics.filmaffinity.com/Modelo_77-740028363-large.jpg",
+        "genero": "Misterio",
+        "sinopsis": "Un joven contable, a la espera de ser juzgado en 1977 por malversaci\u00f3n de fondos con una posible condena de 20 a\u00f1os, se une a un grupo de presos que exigen una amnist\u00eda."
+    },
+    {
+        "id": "0f06589eca316512ab3099b4a6c5f21f6e61f8602d078605977b6ef453e29912",
+        "nombre": "Titanic",
+        "anio": 1997,
+        "fecha_estreno": "19 de diciembre",
+        "director": "James Cameron",
+        "genero": "Drama/Romance",
+        "img": "https://es.web.img3.acsta.net/medias/nmedia/18/86/91/41/19870073.jpg",
+        "sinopsis": "Un joven artista y una joven aristócrata se enamoran a bordo del Titanic durante su fatídico viaje inaugural."
+    },
+    {
+        "id": "1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t",
+        "nombre": "Avatar",
+        "anio": 2009,
+        "fecha_estreno": "18 de diciembre",
+        "director": "James Cameron",
+        "genero": "Ciencia ficción/Aventuras",
+        "img": "https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM1YjI1NzMxXkEyXkFqcGdeQXVyMjQxNTE1MDA@._V1_.jpg",
+        "sinopsis": "Un ex-marine es reclutado para trabajar en el planeta Pandora, donde se encuentra en medio de un conflicto entre humanos y nativos Na'vi."
+    },
+    {
+        "id": "2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1",
+        "nombre": "El Padrino",
+        "anio": 1972,
+        "fecha_estreno": "24 de marzo",
+        "director": "Francis Ford Coppola",
+        "genero": "Crimen/Drama",
+        "img": "https://images.justwatch.com/poster/289648853/s718/el-padrino.jpg",
+        "sinopsis": "La saga de una poderosa familia mafiosa italiana en Nueva York, liderada por Don Vito Corleone."
+    },
+    {
+        "id": "3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u",
+        "nombre": "Forrest Gump",
+        "anio": 1994,
+        "fecha_estreno": "6 de julio",
+        "director": "Robert Zemeckis",
+        "genero": "Drama/Comedia",
+        "img": "https://flxt.tmsimg.com/assets/p15829_v_v13_aa.jpg",
+        "sinopsis": "La vida de un hombre con un coeficiente intelectual bajo que, sin embargo, tiene un impacto significativo en la sociedad."
+    },
+    {
+        "id": "4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v",
+        "nombre": "El Señor de los Anillos: El Retorno del Rey",
+        "anio": 2003,
+        "fecha_estreno": "17 de diciembre",
+        "director": "Peter Jackson",
+        "genero": "Fantasía/Aventuras",
+        "img": "https://es.web.img2.acsta.net/medias/nmedia/18/89/68/19/20061877.jpg",
+        "sinopsis": "Frodo y Sam continúan su viaje para destruir el Anillo Único mientras el ejército de Sauron se acerca a la batalla final."
+    },
+    {
+        "id": "5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w",
+        "nombre": "Jurassic Park",
+        "anio": 1993,
+        "fecha_estreno": "11 de junio",
+        "director": "Steven Spielberg",
+        "genero": "Ciencia ficción/Aventuras",
+        "img": "https://i.pinimg.com/originals/51/ba/64/51ba64b2e61f820e0e86bdd2f4c6e92c.jpg",
+        "sinopsis": "Un parque de diversiones con dinosaurios clonados se convierte en una pesadilla cuando los dinosaurios se escapan y atacan a los visitantes."
+    },
+    {
+        "id": "6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x",
+        "nombre": "Harry Potter y la Piedra Filosofal",
+        "anio": 2001,
+        "fecha_estreno": "16 de noviembre",
+        "director": "Chris Columbus",
+        "genero": "Fantasía/Aventuras",
+        "img": "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2016/12/harry-potter-piedra-filosofal.jpg",
+        "sinopsis": "Un niño huérfano descubre que es un mago y comienza su educación en la escuela de magia de Hogwarts."
+    },
+    {
+        "id": "7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y",
+        "nombre": "El Rey León",
+        "anio": 1994,
+        "fecha_estreno": "15 de junio",
+        "director": "Roger Allers, Rob Minkoff",
+        "genero": "Animación/Aventuras",
+        "img": "https://lumiere-a.akamaihd.net/v1/images/image_8b5ca578.jpg",
+        "sinopsis": "Simba, un joven león, debe enfrentar su destino y reclamar su lugar como rey después de ser exiliado por su tío malvado."
+    },
+    {
+        "id": "8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z",
+        "nombre": "La La Land",
+        "anio": 2016,
+        "fecha_estreno": "9 de diciembre",
+        "director": "Damien Chazelle",
+        "genero": "Musical/Drama",
+        "img": "https://m.media-amazon.com/images/M/MV5BMzUzNDM2NzM2MV5BMl5BanBnXkFtZTgwNTM3NTg4OTE@._V1_.jpg",
+        "sinopsis": "Dos artistas en Los Ángeles se enamoran mientras persiguen sus sueños en la industria del entretenimiento."
+    },
+    {
+        "id": "9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z0",
+        "nombre": "Matrix",
+        "anio": 1999,
+        "fecha_estreno": "31 de marzo",
+        "director": "The Wachowskis",
+        "genero": "Ciencia ficción/Acción",
+        "img": "https://www.elespectadorimaginario.com/media/diciembre09/imgthe-matrix-movie1.jpg",
+        "sinopsis": "Un programador descubre que el mundo que conoce es una simulación y se une a la resistencia para combatir a las máquinas."
+    },
+    {
+        "id": "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t",
+        "nombre": "Interestelar",
+        "anio": 2014,
+        "fecha_estreno": "5 de noviembre",
+        "director": "Christopher Nolan",
+        "genero": "Ciencia ficción/Drama",
+        "img": "https://images.justwatch.com/poster/193089381/s718/interstellar.jpg",
+        "sinopsis": "Un grupo de astronautas se embarca en un viaje interestelar para encontrar un nuevo hogar para la humanidad debido a la degradación de la Tierra."
+    },
+    {
+        "id": "b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0",
+        "nombre": "El Caballero de la Noche",
+        "anio": 2008,
+        "fecha_estreno": "18 de julio",
+        "director": "Christopher Nolan",
+        "genero": "Acción/Drama",
+        "img": "https://i.pinimg.com/originals/70/0d/c5/700dc577d95fa281517892913f161b83.jpg",
+        "sinopsis": "Batman se enfrenta al Joker, un villano sádico que amenaza a Gotham City con el caos y la destrucción."
+    },
+    {
+        "id": "c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t01",
+        "nombre": "Pulp Fiction",
+        "anio": 1994,
+        "fecha_estreno": "14 de octubre",
+        "director": "Quentin Tarantino",
+        "genero": "Crimen/Drama",
+        "img": "https://static.wixstatic.com/media/8a5f34_01ce144d764e417cb8c91badd0d46306~mv2.jpg",
+        "sinopsis": "La historia de varios personajes interconectados involucrados en el mundo del crimen en Los Ángeles."
+    },
+    {
+        "id": "d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t012",
+        "nombre": "Star Wars: Episodio IV - Una Nueva Esperanza",
+        "anio": 1977,
+        "fecha_estreno": "25 de mayo",
+        "director": "George Lucas",
+        "genero": "Ciencia ficción/Aventuras",
+        "img": "https://sm.ign.com/ign_es/movie/s/star-wars-/star-wars-episodio-iv_y2kx.jpg",
+        "sinopsis": "Un joven granjero se une a la Rebelión para luchar contra el malvado Imperio Galáctico."
+    },
+    {
+        "id": "e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0123",
+        "nombre": "Los Vengadores",
+        "anio": 2012,
+        "fecha_estreno": "4 de mayo",
+        "director": "Joss Whedon",
+        "genero": "Ciencia ficción/Acción",
+        "img": "https://es.web.img3.acsta.net/pictures/14/03/10/10/35/587504.jpg",
+        "sinopsis": "Un grupo de superhéroes se une para detener a un villano que amenaza con destruir la Tierra."
+    },
+    {
+        "id": "f6g7h8i9j0k1l2m3n4o5p6q7r8s9t01234",
+        "nombre": "El Laberinto del Fauno",
+        "anio": 2006,
+        "fecha_estreno": "11 de octubre",
+        "director": "Guillermo del Toro",
+        "genero": "Fantasía/Drama",
+        "img": "https://pics.filmaffinity.com/El_laberinto_del_fauno-985415492-large.jpg",
+        "sinopsis": "Una niña en la posguerra española descubre un mágico laberinto que la lleva a un mundo de fantasía."
+    },
+    {
+        "id": "g7h8i9j0k1l2m3n4o5p6q7r8s9t012345",
+        "nombre": "Cadena Perpetua",
+        "anio": 1994,
+        "fecha_estreno": "23 de septiembre",
+        "director": "Frank Darabont",
+        "genero": "Drama/Crimen",
+        "img": "https://es.web.img3.acsta.net/medias/nmedia/18/74/26/88/20133359.jpg",
+        "sinopsis": "La historia de un hombre que pasa la mayor parte de su vida en prisión y su amistad con otro prisionero."
+    },
+    {
+        "id": "h8i9j0k1l2m3n4o5p6q7r8s9t0123456",
+        "nombre": "Inception",
+        "anio": 2010,
+        "fecha_estreno": "16 de julio",
+        "director": "Christopher Nolan",
+        "genero": "Ciencia ficción/Acción",
+        "img": "https://pics.filmaffinity.com/Origen-652954101-large.jpg",
+        "sinopsis": "Un ladrón especializado en robar información de los sueños de las personas es contratado para realizar una misión imposible."
+    },
+    {
+        "id": "i9j0k1l2m3n4o5p6q7r8s9t01234567",
+        "nombre": "Gladiator",
+        "anio": 2000,
+        "fecha_estreno": "5 de mayo",
+        "director": "Ridley Scott",
+        "genero": "Acción/Drama",
+        "img": "https://pics.filmaffinity.com/Gladiator-419643516-large.jpg",
+        "sinopsis": "Un general romano traicionado busca venganza como gladiador en el Coliseo."
+    },
+    {
+        "id": "j0k1l2m3n4o5p6q7r8s9t012345678",
+        "nombre": "E.T. el Extraterrestre",
+        "anio": 1982,
+        "fecha_estreno": "11 de junio",
+        "director": "Steven Spielberg",
+        "genero": "Ciencia ficción/Aventuras",
+        "img": "https://pics.filmaffinity.com/E_T_el_extraterrestre-391240254-large.jpg",
+        "sinopsis": "Un niño encuentra y ayuda a un alienígena perdido a regresar a su hogar mientras evita ser capturado por el gobierno."
+    },
+    {
+        "id": "k1l2m3n4o5p6q7r8s9t0123456789",
+        "nombre": "Ratatouille",
+        "anio": 2007,
+        "fecha_estreno": "29 de junio",
+        "director": "Brad Bird, Jan Pinkava",
+        "genero": "Animación/Comedia",
+        "img": "https://pics.filmaffinity.com/Ratatouille-602107251-large.jpg",
+        "sinopsis": "Un ratón apasionado por la cocina se convierte en el chef principal en un prestigioso restaurante de París."
+    },
+    {
+        "id": "l2m3n4o5p6q7r8s9t01234567890",
+        "nombre": "La Lista de Schindler",
+        "anio": 1993,
+        "fecha_estreno": "30 de noviembre",
+        "director": "Steven Spielberg",
+        "genero": "Drama/Historia",
+        "img": "https://es.web.img3.acsta.net/pictures/19/02/12/18/49/4078948.jpg",
+        "sinopsis": "La historia de un empresario alemán que salva a más de mil judíos durante el Holocausto."
+    },
+    {
+        "id": "m3n4o5p6q7r8s9t012345678901",
+        "nombre": "El Gran Hotel Budapest",
+        "anio": 2014,
+        "fecha_estreno": "6 de marzo",
+        "director": "Wes Anderson",
+        "genero": "Comedia/Drama",
+        "img": "https://pics.filmaffinity.com/El_Gran_Hotel_Budapest-201169276-large.jpg",
+        "sinopsis": "Las aventuras de un conserje de un hotel y su joven aprendiz en la Europa de entreguerras."
+    },
+    {
+        "id": "n4o5p6q7r8s9t0123456789012",
+        "nombre": "Blade Runner",
+        "anio": 1982,
+        "fecha_estreno": "25 de junio",
+        "director": "Ridley Scott",
+        "genero": "Ciencia ficción/Noir",
+        "img": "https://es.web.img3.acsta.net/pictures/17/10/03/08/45/4260918.jpg",
+        "sinopsis": "Un detective caza androides rebeldes en una distópica Los Ángeles del futuro."
+    },
+    {
+        "id": "o5p6q7r8s9t01234567890123",
+        "nombre": "Mad Max: Fury Road",
+        "anio": 2015,
+        "fecha_estreno": "15 de mayo",
+        "director": "George Miller",
+        "genero": "Ciencia ficción/Acción",
+        "img": "https://m.media-amazon.com/images/M/MV5BN2EwM2I5OWMtMGQyMi00Zjg1LWJkNTctZTdjYTA4OGUwZjMyXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg",
+        "sinopsis": "Un guerrero postapocalíptico se une a un grupo de mujeres valientes para escapar de un tirano en un mundo desolado."
+    },
+    {
+        "id": "p6q7r8s9t012345678901234",
+        "nombre": "Toy Story",
+        "anio": 1995,
+        "fecha_estreno": "22 de noviembre",
+        "director": "John Lasseter",
+        "genero": "Animación/Comedia",
+        "img": "https://pics.filmaffinity.com/Toy_Story-626273371-large.jpg",
+        "sinopsis": "Los juguetes de un niño cobran vida cuando él no está y deben lidiar con la llegada de un nuevo juguete al grupo."
+    },
+    {
+        "id": "4b5c6d7e8f9g0h1i2j3k4l5m6n7o8p9q0r1s2t3u4v5w6x7y8z9a0",
+        "nombre": "El Misterio de la Isla Perdida",
+        "anio": 1935,
+        "fecha_estreno": "23 de noviembre",
+        "director": "Carlos Sánchez",
+        "genero": "Misterio/Aventuras",
+        "img": "https://es.web.img2.acsta.net/pictures/14/12/16/10/35/161836.jpg",
+        "sinopsis": "Un grupo de exploradores espaciales se embarca en una misión para descubrir nuevos mundos en las profundidades del espacio."
+    }
+]
