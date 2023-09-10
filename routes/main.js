@@ -3,6 +3,10 @@ const { getEstrenos, getPeliculas, getActores, getPelicula, getOrigenNombre } = 
 
 const rutas = Router();
 
+rutas.get('/', (req, res) => {
+    res.redirect('/peliculas');
+});
+
 rutas.get('/peliculas', getPeliculas);
 rutas.get('/pelicula/:id', getPelicula);
 
