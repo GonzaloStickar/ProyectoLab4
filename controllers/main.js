@@ -15,47 +15,48 @@ const getPeliculas = (req = request, res = response) => {
             res.status(500).send('Error al leer el archivo');
             return;
         }
-    // res.json(JSON.parse(data));
-    const nombre_peliculas = [];
-    const imagenes_peliculas = [];
+        // res.json(JSON.parse(data));
+        const nombre_peliculas = [];
+        const imagenes_peliculas = [];
 
-    const jsonData = JSON.parse(data);
-    const nombres = jsonData.map(item => item.nombre);
-    const imagenes = jsonData.map(item => item.img);
+        const jsonData = JSON.parse(data);
+        const nombres = jsonData.map(item => item.nombre);
+        const imagenes = jsonData.map(item => item.img);
 
-    for (let i=0; i < nombres.length && nombre_peliculas.length < 10; i++) {
-        nombre_peliculas.push(nombres[i]);
-        imagenes_peliculas.push(imagenes[i]);
-    }
+        for (let i=0; i < 10; i++) {
+            nombre_peliculas.push(nombres[i]);
+            imagenes_peliculas.push(imagenes[i]);
+        }
 
-    const pelicula = nombre_peliculas.map((nombre, i) => `
-        <a>
-            <p id="nombrePelicula">${nombre}</p>
-            <img src="${imagenes_peliculas[i]}" alt="${nombre}" width="215px" height="325px">
-        </a>
-    `).join('');
+        const peliculas = nombre_peliculas.map((nombre, i) => `
+            <div id="${i}">
+                <a>
+                    <img src="${imagenes_peliculas[i]}" alt="${nombre}" width="225px" height="325px">
+                </a>
+                <p class="nombre_pelicula">${nombre}</p>
+            </div>
+        `).join('');
 
-        res.send(`
-            <!DOCTYPE html>
-            <html>
-                <head>
-                    <title>Películas Online</title>
-                    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-                    <meta charset="utf-8">
-                    <link rel="stylesheet" type="text/css" href="/static/estilos/peliculasEstilos.css">
-                    </head>
-                <body>
-                    <article>
-                        <div class="articulos">
-                            <ul id="pelicula">
-                                ${pelicula}
-                            </ul>
-                        </div>
-                    </article>
-                </body>
+        const paginaPrincipal = fs.readFileSync('./public/templates/peliculas.html', 'utf8');
 
-            </html>
-        `);
+        if (peliculas.length>0) {
+            const articulosPeliculas =`
+            <main>
+                <article>
+                    <div class="articulos">
+                        ${peliculas}
+                    </div>
+                </article>
+            </main>
+            `;
+
+            const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main>${articulosPeliculas}</main>`);
+            res.send(paginaConNuevoContenido);
+        }
+        else {
+            const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main><h1>No hay películas</h1></main>`);
+            res.send(paginaConNuevoContenido);
+        }
     });
 }
 
