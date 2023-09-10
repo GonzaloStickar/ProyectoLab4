@@ -1,17 +1,66 @@
 * {
     padding:0;
     margin: 0;
-    font-family:'Franklin Gothic Medium', 'Verdana', Arial, sans-serif;
+    font-family:'Franklin Gothic Medium', 'Verdana', Arial, sans-serif !important;
 }
 
-html {
+header {
+    height: 50px;
+    width: 100%;
+    background: linear-gradient(#e66465, #9198e5);
+}
+header nav {
+    display:flex;
+    flex-direction:row;
+}
+
+.boton_inicio {
+    margin-left: 5.5px;
+    margin-top:5.5px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.boton_inicio:hover {
+    background-color: #007bff;
+}
+.boton_inicio:active {
+    background: #0b7dda;
+}
+
+.boton_directores, .boton_generos {
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5.5px;
+    margin-top:5.5px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    margin-left: 5.5px;
+    margin-top:5.5px;
+}
+
+.boton_directores:hover, .boton_generos:hover {
+    background-color: #4CAF50;
+}
+
+.boton_directores:active, .boton_generos:active {
+    background-color: #389a3b;
+}
+
+body {
     background: linear-gradient(90deg, rgb(74, 213, 255) 10%, rgb(0, 52, 101) 90%);
 }
-html {
+body {
     background-image:url('../img/fondo.jpg');
     background-repeat:no-repeat;
     background-size:cover;
-    font-family: "Roboto", sans-serif;
+    font-family: "Roboto", sans-serif !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;      
 }
@@ -21,36 +70,36 @@ html {
     align-items:center;
     justify-content: space-evenly;
     flex-wrap:wrap;
-  }
+}
   
-  .articulos div {
-      position:relative;
-      display:flex;
-      display:inline-block;
-      justify-items: auto;
-      margin:20px;
-  }
+.articulos div {
+    position:relative;
+    display:flex;
+    display:inline-block;
+    justify-items: auto;
+    margin:20px;
+}
   
-  .articulos div p {
-      text-align: center;
-      color: black;
-      background-color: aliceblue;
-      bottom:1.25%;
-      width: 215px;
-      height:25px;
-  }
+.articulos div p {
+    text-align: center;
+    color: black;
+    background-color: aliceblue;
+    bottom:1.25%;
+    width: 215px;
+    height:25px;
+}
 
-  .articulos h1 {
+.articulos h1 {
     color:white;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Times New Roman', Times, serif !important;
     position: relative;
     z-index: 1;
     margin-top: 125px;
     font-size: 75px;
     text-shadow: 0.1em 0.1em 0.1em rgba(0, 0, 0, 0.729);
-  }
+}
 
-  .nombre_pelicula {
+.nombre_pelicula {
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
@@ -63,4 +112,20 @@ html {
 
 h1 {
     color:red;
+}
+
+footer {
+    position:relative;
+    bottom: 0%;
+    height: 35px;
+    width: 100%;
+    background-color: #222222;
+}
+
+footer p {
+    padding-top: 6px;
+    text-align: center;
+    font-family: Be Vietnam Pro, sans-serif;
+    color: #fff;
+    font-size: 17px;
 }

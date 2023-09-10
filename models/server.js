@@ -29,7 +29,7 @@ class Server{
             res.send('Home');
         }); */
 
-        this.app.use('/', require('../routes/demo'));
+        this.app.use('/', require('../routes/main'));
     }
 
 

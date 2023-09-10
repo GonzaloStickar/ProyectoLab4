@@ -10,14 +10,45 @@
 <body>
     <div id="contenedor">
         <header>
+            <nav>
+                <div class="caja_boton_inicio">
+                    <button class="boton_inicio">
+                        <p>Inicio</p>
+                    </button>
+                </div>
 
+                <div class="caja_directores_boton">
+                    <button class="boton_directores">
+                        <p>Directores</p>
+                    </button>
+                </div>
+
+                <div class="caja_generos_boton">
+                    <button class="boton_generos">
+                        <p>Géneros</p>
+                    </button>
+                </div>
+            </nav>
         </header>
+
         <main>
 
         </main>
+        
         <footer>
-            
+            <p>
+                &copy; 2023   -   Integrantes: Gonzalo Stickar, Luciano Cossia, Facundo Elizalde.
+            </p>
         </footer>
     </div>
+
+    <script>
+        const botonInicio = document.getElementById("boton_inicio");
+        botonInicio.addEventListener("click", function() {
+            window.location.href = "/peliculas";
+        });
+
+
+    </script>
 </body>
 </html>
