@@ -7,7 +7,7 @@
 header {
     height: 50px;
     width: 100%;
-    background: linear-gradient(#e66465, #9198e5);
+    background: linear-gradient(90deg, rgb(66, 65, 65) 0%, rgba(16, 0, 1, 0.009) 100%);
 }
 header nav {
     display:flex;
@@ -15,47 +15,118 @@ header nav {
 }
 
 .boton_inicio {
-    margin-left: 5.5px;
-    margin-top:5.5px;
+    margin-top:5px;
+    margin-left:12.5px;
+    margin-right:12.5px;
     padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
+    background-color: #3498db;
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .boton_inicio:hover {
-    background-color: #007bff;
-}
-.boton_inicio:active {
-    background: #0b7dda;
+    background-color: #2980b9;
+    transform: scale(1.05);
 }
 
-.boton_directores, .boton_generos {
-    color: white;
+.boton_inicio:focus {
+    outline: none;
+}
+
+.boton_inicio p {
+    margin: 0;
+}
+
+.boton_directores, .boton_generos{
+    background:#1AAB8A;
+    color:#fff;
+    border:none;
+    position:relative;
+    font-size:18px;
+    margin-left: 5.5px;
+    padding: 10px 20px;
+    margin-left: 5.5px;
+    height: 50px;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+}
+
+.boton_directores:hover, .boton_generos:hover{
+    background:#fff;
+    color:#1AAB8A;
+}
+
+.boton_directores:before, .boton_generos:before,.boton_directores:after, .boton_generos:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #1AAB8A;
+    transition:400ms ease all;
+  }
+
+.boton_directores:after, .boton_generos:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+}
+
+.boton_directores:hover:before, .boton_generos:hover:before,.boton_directores:hover:after, .boton_generos:hover:after{
+    width:100%;
+    transition:800ms ease all;
+}
+
+.buscador {
+    position:absolute;
+    right:10%;
+}
+
+.input_buscador {
+    height: 30px;
+    width: 215px;
+    border-radius:20px;
+    border:black;
+    outline:0;
+}
+
+#input_texto {
+    margin-top:10px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    cursor:auto;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-left: 5.5px;
-    margin-top:5.5px;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    margin-left: 5.5px;
-    margin-top:5.5px;
+    font-size: 18px;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
-.boton_directores:hover, .boton_generos:hover {
-    background-color: #4CAF50;
+input[type="submit"]:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
 }
 
-.boton_directores:active, .boton_generos:active {
-    background-color: #389a3b;
+input[type="submit"]:focus {
+    outline: none;
 }
 
 body {
     background: linear-gradient(90deg, rgb(74, 213, 255) 10%, rgb(0, 52, 101) 90%);
 }
+
 body {
     background-image:url('../img/fondo.jpg');
     background-repeat:no-repeat;
@@ -71,22 +142,33 @@ body {
     justify-content: space-evenly;
     flex-wrap:wrap;
 }
-  
+
 .articulos div {
-    position:relative;
     display:flex;
-    display:inline-block;
+    position: relative;
+    display: inline-block;
     justify-items: auto;
-    margin:20px;
+    margin: 20px;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s;
 }
-  
-.articulos div p {
+
+.articulos div .nombre_pelicula {
     text-align: center;
-    color: black;
-    background-color: aliceblue;
     bottom:1.25%;
     width: 215px;
-    height:25px;
+    height:32.5px;
+    color: #f2f2f2;
+    background-color: rgba(0,0,0, 0.5);
+    padding: 8px;
+    margin: 0;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    text-shadow: 2px 2px 4px rgba(0.5, 0.5, 0.5, 1);
 }
 
 .articulos h1 {
@@ -99,6 +181,10 @@ body {
     text-shadow: 0.1em 0.1em 0.1em rgba(0, 0, 0, 0.729);
 }
 
+.articulos div:hover {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+}
+
 .nombre_pelicula {
     position: absolute !important;
     top: 0 !important;
@@ -107,19 +193,71 @@ body {
     padding: 5px !important;
     margin: 0 !important;
     font-weight: bold !important;
-    /* color:red !important; */
 }
 
-h1 {
-    color:red;
+.sinopsis_pelicula {
+    margin-right: 10px;
+    position: absolute !important;
+    bottom: 0 !important;
+    width: 225px;
+    height: 57.5px;
+    background-color: rgba(255, 196, 137, 0.7) !important;
+    font-weight: bold !important;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    text-shadow: 0.1em 0.1em 0.1em rgba(0, 0, 0, 0.729);
+    font-size:12.5px;
+    text-align: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.sinopsis_pelicula a {
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(0, 123, 255);
+}
+
+.sinopsis_pelicula a:hover {
+    color: rgb(139, 110, 212);
+}
+
+.sinopsis_pelicula a:active {
+    color: rgb(0, 123, 255);
+}
+
+.contenedor:hover .sinopsis_pelicula {
+    opacity: 1;
+}
+
+.contenedor {
+    display:flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.contenedor img {
+    transition: transform 0.3s;
+}
+
+.contenedor:hover img {
+    -webkit-transform: scale(1.125);
+    transform: scale(1.125);
+}
+
+main {
+    flex-grow: 1;
 }
 
 footer {
-    position:relative;
-    bottom: 0%;
+    position: relative;
+    margin-top: auto;
     height: 35px;
     width: 100%;
-    background-color: #222222;
+    background: linear-gradient(90deg, rgb(66, 65, 65) 0%, rgba(16, 0, 1, 0.009) 100%);
+    color: #fff;
+    padding: 12.5px 0;
+    text-align: center;
 }
 
 footer p {
@@ -128,4 +266,15 @@ footer p {
     font-family: Be Vietnam Pro, sans-serif;
     color: #fff;
     font-size: 17px;
+}
+
+footer a {
+    text-shadow: 0.1em 0.1em 0.1em rgba(0, 0, 0, 0.729);
+    color: #ff4500;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #fff;
 }

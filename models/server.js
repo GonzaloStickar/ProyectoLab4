@@ -19,6 +19,8 @@ class Server{
         //Probar alguna regla de restricción
         this.app.use(cors());
         
+        this.app.use(express.urlencoded({ extended: true }));
+
         //Una vez que se configura esta sección publica, NO 
         //es posible utilizar
         this.app.use(express.static('public'));

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/estilos/peliculasEstilos.css">
+    <link rel="shortcut icon" href="../static/img/icon.png">
     <title>Películas Online</title>
 </head>
 <body>
@@ -12,7 +13,7 @@
         <header>
             <nav>
                 <div class="caja_boton_inicio">
-                    <button class="boton_inicio">
+                    <button class="boton_inicio" onclick="irAPeliculas()">
                         <p>Inicio</p>
                     </button>
                 </div>
@@ -28,6 +29,14 @@
                         <p>Géneros</p>
                     </button>
                 </div>
+
+                <div class="buscador">
+                    <form class="formulario_buscar" action="/peliculas/buscar" method="post">
+                        <input type="text" id="input_texto" name="busqueda" placeholder="  Que desea buscar?" 
+                        class="input_buscador" required>
+                        <input type="submit" value="Buscar" class="boton-menu">
+                    </form>
+                </div>
             </nav>
         </header>
 
@@ -37,18 +46,18 @@
         
         <footer>
             <p>
-                &copy; 2023   -   Integrantes: Gonzalo Stickar, Luciano Cossia, Facundo Elizalde.
+                &copy; 2023 - Integrantes:
+                <a href="https://github.com/GonzaloStickar" target="_blank">Gonzalo Stickar</a>,
+                <a href="https://github.com/lcossia" target="_blank">Luciano Cossia</a>,
+                <a href="https://github.com/FacundoElizalde" target="_blank">Facundo Elizalde</a>.
             </p>
         </footer>
     </div>
 
     <script>
-        const botonInicio = document.getElementById("boton_inicio");
-        botonInicio.addEventListener("click", function() {
+        function irAPeliculas() {
             window.location.href = "/peliculas";
-        });
-
-
+        }
     </script>
 </body>
 </html>
