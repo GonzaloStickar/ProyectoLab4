@@ -113,17 +113,19 @@ const buscarPeliculas = (req, res) => {
             for (const pelicula of data.Search) {
                 if (pelicula.Title == "N/A" || pelicula.Poster == "N/A") {
                     continue;
-                } else {
+                }
+                else {
                     nombre_peliculas.push(pelicula.Title);
                     imagenes_peliculas.push(pelicula.Poster);
                     id_peliculas.push(pelicula.imdbID);
 
                     const promesaDetalle = axios.get(`https://www.omdbapi.com/?apikey=${clave}&i=${pelicula.imdbID}`)
                         .then(({ data: data2 }) => {
-                            if ("Plot" in data2) {
+                            if ("Plot" in data2 && data2.Plot != "N/A") {
                                 sinopsis_peliculas.push(data2.Plot);
-                            } else {
-                                sinopsis_peliculas.push("No hay sinopsis que se haya encontrado.");
+                            }
+                            else {
+                                sinopsis_peliculas.push("Error al buscar una sinopsis / No se encontró una sinopsis");
                             }
                         })
                         .catch((error) => {
@@ -159,7 +161,8 @@ const buscarPeliculas = (req, res) => {
 
                         const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main>${articulosPeliculas}</main>`);
                         res.status(200).send(paginaConNuevoContenido);
-                    } else {
+                    }
+                    else {
                         const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main><h1>Hay muchas películas con la busqueda: '${busqueda}'</h1></main>`);
                         res.status(404).send(paginaConNuevoContenido);
                     }
