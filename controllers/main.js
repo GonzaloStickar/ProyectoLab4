@@ -13,6 +13,7 @@ const getPeliculas = (req = request, res = response) => {
     const nombre_peliculas = [];
     const imagenes_peliculas = [];
     const id_peliculas = [];
+    const sinopsis_peliculas = [];
 
     //GENERAR PELÍCULAS A PARTIR DEL JSON peliculas.json (código).
 
@@ -29,12 +30,13 @@ const getPeliculas = (req = request, res = response) => {
         const nombres = jsonData.map(item => item.nombre);
         const imagenes = jsonData.map(item => item.img);
         const ids = jsonData.map(item => item.id);
-        const sinopsis_peliculas = jsonData.map(item => item.sinopsis)
+        const sinopsis = jsonData.map(item => item.sinopsis)
 
         for (let i=0; i < 10; i++) {
             nombre_peliculas.push(nombres[i]);
             imagenes_peliculas.push(imagenes[i]);
             id_peliculas.push(ids[i]);
+            sinopsis_peliculas.push(sinopsis[i]);
         }
 
         const peliculas = nombre_peliculas.map((nombre, i) => `
@@ -105,56 +107,36 @@ const buscarPeliculas = (req, res) => {
 
     axios.get(`https://www.omdbapi.com/?apikey=${clave}&s=${busqueda}`)
     .then(({ data }) => {
-        if (data.Response!='False') {
-            //res.json(data);
-            //peliculas_Encontradas.push(data);
+        if (data.Response !== 'False') {
+            const promesas = [];
+
             for (const pelicula of data.Search) {
-                if (pelicula.Title == "N/A" || pelicula.Poster == "N/A" || !pelicula.hasOwnProperty("Plot")) {
+                if (pelicula.Title == "N/A" || pelicula.Poster == "N/A") {
                     continue;
-                }
-                else {
+                } else {
                     nombre_peliculas.push(pelicula.Title);
                     imagenes_peliculas.push(pelicula.Poster);
                     id_peliculas.push(pelicula.imdbID);
-                    sinopsis_peliculas.push(pelicula.Plot);
+
+                    const promesaDetalle = axios.get(`https://www.omdbapi.com/?apikey=${clave}&i=${pelicula.imdbID}`)
+                        .then(({ data: data2 }) => {
+                            if ("Plot" in data2) {
+                                sinopsis_peliculas.push(data2.Plot);
+                            } else {
+                                sinopsis_peliculas.push("No hay sinopsis que se haya encontrado.");
+                            }
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+
+                    promesas.push(promesaDetalle);
                 }
             }
-            if (nombre_peliculas.length>0) {
-                const peliculas = nombre_peliculas.map((nombre, i) => `
-                    <div id="${i}" class="contenedor">
-                        <a href="/pelicula/${id_peliculas[i]}">
-                            <img src="${imagenes_peliculas[i]}" alt="${nombre}" width="225px" height="325px">
-                        </a>
-                        <p class="sinopsis_pelicula">${sinopsis_peliculas[i].length > 125 ? `${sinopsis_peliculas[i].slice(0, 120)}... <a class="enlace_pelicula" href="/pelicula/${id_peliculas[i]}">más</a>` : sinopsis_peliculas[i]}</p>
-                        <p class="nombre_pelicula">${nombre}</p>
-                    </div>
-                `).join('');
 
-                const articulosPeliculas =`
-                    <main>
-                        <article>
-                            <div class="articulos">
-                                ${peliculas}
-                            </div>
-                        </article>
-                    </main>
-                `;
-
-                const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main>${articulosPeliculas}</main>`);
-                res.status(200).send(paginaConNuevoContenido);
-            }
-        }
-        if (nombre_peliculas.length==0 && imagenes_peliculas.length==0 && sinopsis_peliculas.length==0) {
-            axios.get(`https://www.omdbapi.com/?apikey=${clave}&t=${busqueda}`)
-            .then(({ data }) => {
-                if (data.Response!='False') {
-                    if (data.Title != "N/A" && data.Poster != "N/A" && data.hasOwnProperty("Plot")) {
-                        nombre_peliculas.push(data.Title);
-                        imagenes_peliculas.push(data.Poster);
-                        id_peliculas.push(data.imdbID);
-                        sinopsis_peliculas.push(data.Plot);
-                    }
-                    if (nombre_peliculas.length>0) {
+            Promise.all(promesas)
+                .then(() => {
+                    if (nombre_peliculas.length > 0) {
                         const peliculas = nombre_peliculas.map((nombre, i) => `
                             <div id="${i}" class="contenedor">
                                 <a href="/pelicula/${id_peliculas[i]}">
@@ -165,7 +147,7 @@ const buscarPeliculas = (req, res) => {
                             </div>
                         `).join('');
 
-                        const articulosPeliculas =`
+                        const articulosPeliculas = `
                             <main>
                                 <article>
                                     <div class="articulos">
@@ -177,15 +159,19 @@ const buscarPeliculas = (req, res) => {
 
                         const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main>${articulosPeliculas}</main>`);
                         res.status(200).send(paginaConNuevoContenido);
+                    } else {
+                        const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main><h1>Hay muchas películas con la busqueda: '${busqueda}'</h1></main>`);
+                        res.status(404).send(paginaConNuevoContenido);
                     }
-                }
-            })
+                })
+                .catch((error) => {
+                    console.log(error);
+                    res.status(400).json({
+                        status: 400,
+                        msg: 'Error'
+                    });
+                });
         }
-        else {
-            const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main><h1>Hay muchas películas con la busqueda: '${busqueda}'</h1></main>`);
-            res.status(404).send(paginaConNuevoContenido);
-        }
-        //res.json(data)
     })
     .catch((error) => {
         console.log(error);
@@ -215,7 +201,6 @@ const getOrigenNombre = (req = request, res = response) => {
 
     axios.get(`https://api.nationalize.io/?name=${name}`)
     .then(({ status, data, statusText }) => {
-        // handle success
         console.log({ status, data, statusText });
         res.status(200).json({
             status,
@@ -225,7 +210,6 @@ const getOrigenNombre = (req = request, res = response) => {
         });
     })
     .catch((error)=>{
-        // handle error
         console.log(error);
         res.status(400).json({
             status:400,

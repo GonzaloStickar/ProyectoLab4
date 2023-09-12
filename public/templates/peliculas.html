@@ -33,7 +33,7 @@
                 <div class="buscador">
                     <form class="formulario_buscar" action="/peliculas/buscar" method="post">
                         <input type="text" id="input_texto" name="busqueda" placeholder="  Que desea buscar?" 
-                        class="input_buscador" required>
+                        class="input_buscador" required minlength="3" pattern="^[a-zA-Z0-9]+$">
                         <input type="submit" value="Buscar" class="boton-menu">
                     </form>
                 </div>
