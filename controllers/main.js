@@ -115,17 +115,27 @@ const buscarPeliculas = (req, res) => {
                     continue;
                 }
                 else {
-                    nombre_peliculas.push(pelicula.Title);
-                    imagenes_peliculas.push(pelicula.Poster);
-                    id_peliculas.push(pelicula.imdbID);
+                    axios.get(pelicula.Poster)
+                    .then(response => {
+                        if (response.status === 200) {
+                            nombre_peliculas.push(pelicula.Title);
+                            imagenes_peliculas.push(pelicula.Poster);
+                            id_peliculas.push(pelicula.imdbID);
+                        }
+                    })
+                    .catch (() => {
+                    //   console.error("imagen Not Found");
+                    });
 
                     const promesaDetalle = axios.get(`https://www.omdbapi.com/?apikey=${clave}&i=${pelicula.imdbID}`)
                         .then(({ data: data2 }) => {
-                            if ("Plot" in data2 && data2.Plot != "N/A") {
-                                sinopsis_peliculas.push(data2.Plot);
-                            }
-                            else {
-                                sinopsis_peliculas.push("Error al buscar una sinopsis / No se encontró una sinopsis");
+                            if (data2.Response !== 'False') {
+                                if ("Plot" in data2 && data2.Plot != "N/A") {
+                                    sinopsis_peliculas.push(data2.Plot);
+                                }
+                                else {
+                                    sinopsis_peliculas.push("Error al buscar una sinopsis / No se encontró una sinopsis");
+                                }
                             }
                         })
                         .catch((error) => {
@@ -174,6 +184,10 @@ const buscarPeliculas = (req, res) => {
                         msg: 'Error'
                     });
                 });
+        }
+        else {
+            const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main><h1>No hay películas con la búsqueda: ${busqueda}.</h1></main>`);
+            res.status(404).send(paginaConNuevoContenido);
         }
     })
     .catch((error) => {
