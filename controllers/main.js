@@ -91,7 +91,14 @@ const getPeliculas = (req = request, res = response) => {
 const getPelicula = (req = request, res = response) => {  
     const {id} = req.params;
     //console.log(id);
-    res.json({name: `Pelicula con ID: ${id}`});
+    //res.json({name: `Pelicula con ID: ${id}`});
+    axios.get(`https://www.omdbapi.com/?apikey=${clave}&i=${id}`)
+    .then(({ data }) => {
+        res.json({data});
+    })
+    .catch((error) => {
+        console.log(error);
+    });
 }
 
 const buscarPeliculas = (req, res) => {
