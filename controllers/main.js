@@ -44,7 +44,7 @@ const getPeliculas = (req = request, res = response) => {
                 <a href="/pelicula/${id_peliculas[i]}">
                     <img src="${imagenes_peliculas[i]}" alt="${nombre}" width="225px" height="325px">
                 </a>
-                <p class="sinopsis_pelicula">${sinopsis_peliculas[i].length <= 120 ? sinopsis_peliculas[i] + '.. <a class="enlace_pelicula" href="/pelicula/${id_peliculas[i]}">más</a>' : sinopsis_peliculas[i].slice(0, 120) + '... <a class="enlace_pelicula" href="/pelicula/${id_peliculas[i]}">más</a>'}</p>
+                <p class="sinopsis_pelicula">${sinopsis_peliculas[i].length <= 120 ? sinopsis_peliculas[i] + '.. <a class="enlace_pelicula" href="/pelicula/'+id_peliculas[i]+'">más</a>' : sinopsis_peliculas[i].slice(0, 120) + '... <a class="enlace_pelicula" href="/pelicula/'+id_peliculas[i]+'">más</a>'}</p>
                 <p class="nombre_pelicula">${nombre}</p>
             </div>
         `).join('');
@@ -154,7 +154,7 @@ const buscarPeliculas = (req, res) => {
                                 <a href="/pelicula/${id_peliculas[i]}">
                                     <img src="${imagenes_peliculas[i]}" alt="${nombre}" width="225px" height="325px">
                                 </a>
-                                <p class="sinopsis_pelicula">${sinopsis_peliculas[i].length <= 120 ? sinopsis_peliculas[i] + '.. <a class="enlace_pelicula" href="/pelicula/${id_peliculas[i]}">más</a>' : sinopsis_peliculas[i].slice(0, 120) + '... <a class="enlace_pelicula" href="/pelicula/${id_peliculas[i]}">más</a>'}</p>
+                                <p class="sinopsis_pelicula">${sinopsis_peliculas[i].length <= 120 ? sinopsis_peliculas[i] + '.. <a class="enlace_pelicula" href="/pelicula/'+id_peliculas[i]+'">más</a>' : sinopsis_peliculas[i].slice(0, 120) + '... <a class="enlace_pelicula" href="/pelicula/'+id_peliculas[i]+'">más</a>'}</p>
                                 <p class="nombre_pelicula">${nombre}</p>
                             </div>
                         `).join('');
