@@ -4,116 +4,160 @@ require('dotenv').config();
 
 const clave = process.env.API_KEY;
 
-const getPeliculas = (req = request, res = response) => {
-    const nombre_peliculas = [];
-    const imagenes_peliculas = [];
-    const id_peliculas = [];
-    const sinopsis_peliculas = [];
+function numeroRandom(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+}
 
-    //GENERAR PELÍCULAS A PARTIR DEL JSON peliculas.json (código).
-
-    const fs = require('fs');
-    fs.readFile('./data/peliculas.json', 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error al leer el archivo:', err);
-            res.status(500).send('Error al leer el archivo');
-            return;
-        }
-        // res.json(JSON.parse(data));
-
-        const jsonData = JSON.parse(data);
-        const nombres = jsonData.map(item => item.nombre);
-        const imagenes = jsonData.map(item => item.img);
-        const ids = jsonData.map(item => item.id);
-        const sinopsis = jsonData.map(item => item.sinopsis)
-
-        for (let i=0; i < 10; i++) {
-            nombre_peliculas.push(nombres[i]);
-            imagenes_peliculas.push(imagenes[i]);
-            id_peliculas.push(ids[i]);
-            sinopsis_peliculas.push(sinopsis[i]);
-        }
-
-        const peliculas = nombre_peliculas.map((nombre, i) => `
-            <div id="${i}" class="contenedor">
-                <a href="/pelicula/${id_peliculas[i]}">
-                    <img src="${imagenes_peliculas[i]}" alt="${nombre}" width="225px" height="325px">
-                </a>
-                <p class="sinopsis_pelicula">${sinopsis_peliculas[i].length <= 120 ? sinopsis_peliculas[i] + '.. <a class="enlace_pelicula" href="/pelicula/'+id_peliculas[i]+'">más</a>' : sinopsis_peliculas[i].slice(0, 120) + '... <a class="enlace_pelicula" href="/pelicula/'+id_peliculas[i]+'">más</a>'}</p>
-                <p class="nombre_pelicula">${nombre}</p>
-            </div>
-        `).join('');
-
+const getPeliculas = async (req = request, res = response) => {
+    try {
+        const fs = require('fs');
         const paginaPrincipal = fs.readFileSync('./public/templates/peliculas.html', 'utf8');
-        if (peliculas.length>0) {
-            const articulosPeliculas =`
-            <main>
-                <article>
-                    <div class="articulos">
-                        ${peliculas}
-                    </div>
-                </article>
-            </main>
+
+        const nombre_peliculas = [];
+        const imagenes_peliculas = [];
+        const sinopsis_peliculas = [];
+        const id_peliculas = [];
+
+        const obtenerPalabraAleatoria = async () => {
+            try {
+                const response = await axios.get('https://www.palabrasque.com/palabra-aleatoria.php?Submit=Nueva+palabra');
+                if (response.status === 200) {
+                    const html = response.data;
+                    const regex = /<font data="palabra" size="6" \/><b>(\w+)<\/b><\/font>/;
+                    const match = html.match(regex);
+                    if (match) {
+                        return match[1];
+                    }
+                    else {
+                        console.log('No se encontró una palabra aleatoria en la página.');
+                        return obtenerPalabraAleatoria();
+                    }
+                }
+                else {
+                    console.log('Error al obtener la página:', response.status);
+                    return obtenerPalabraAleatoria();
+                }
+            }
+            catch (error) {
+                console.error(error);
+                throw error;
+            }
+        };
+
+        const obtenerInfoPelicula = async (palabra) => {
+            const palabraSinPrimerCaracterYEnMinusculas = palabra.substring(1).toLowerCase();
+            const palabraPrimerosTresCaracteres = palabraSinPrimerCaracterYEnMinusculas.substring(0, numeroRandom(1, 7));
+        
+            try {
+                const { data } = await axios.get(`https://www.omdbapi.com/?t=${palabraPrimerosTresCaracteres}&apikey=${clave}`);
+                
+                if (data.Response === "True") {
+                    if (data.Poster != "N/A" && data.Title != "N/A") {
+                        try {
+                            await axios.get(data.Poster);
+                        }
+                        catch (posterError) {
+                            console.log('Error al obtener el póster:', posterError.message);
+                        }
+        
+                        nombre_peliculas.push(data.Title);
+                        imagenes_peliculas.push(data.Poster);
+                        id_peliculas.push(data.imdbID);
+        
+                        try {
+                            const { data: data2 } = await axios.get(`https://www.omdbapi.com/?apikey=${clave}&i=${data.imdbID}`);
+                            
+                            if (data2.Response !== 'False' && "Plot" in data2 && data2.Plot != "N/A") {
+                                sinopsis_peliculas.push(data2.Plot);
+                            }
+                            else {
+                                sinopsis_peliculas.push("Error al buscar una sinopsis / No se encontró una sinopsis");
+                            }
+                        }
+                        catch (omdbError) {
+                            console.log('Error al obtener información de la película desde OMDB:', omdbError.message);
+                        }
+                    }
+                    else {
+                        const nuevaPalabra = await obtenerPalabraAleatoria();
+                        if (nuevaPalabra) {
+                            return obtenerInfoPelicula(nuevaPalabra);
+                        }
+                    }
+                }
+                else {
+                    // Si la respuesta de OMDB es 'False' o 'Not Found', intenta con otra palabra aleatoria
+                    console.log(`La película '${palabraPrimerosTresCaracteres}' no se encontró en OMDB. Intentando con otra palabra.`);
+                    const nuevaPalabra = await obtenerPalabraAleatoria();
+                    if (nuevaPalabra) {
+                        return obtenerInfoPelicula(nuevaPalabra);
+                    }
+                }
+            }
+            catch (error) {
+                console.error(error);
+                throw error;
+            }
+        };
+        
+
+        const promesas = Array.from({ length: 10 }, async () => {
+            const palabra = await obtenerPalabraAleatoria();
+            if (palabra) {
+                return obtenerInfoPelicula(palabra);
+            }
+        });
+
+        await Promise.all(promesas);
+
+        if (nombre_peliculas.length > 0) {
+            const peliculas = nombre_peliculas.map((nombre, i) => `
+                <div id="${i}" class="contenedor">
+                    <a href="/pelicula/${id_peliculas[i]}">
+                        <img src="${imagenes_peliculas[i]}" alt="${nombre}" width="225px" height="325px">
+                    </a>
+                    <p class="sinopsis_pelicula">${sinopsis_peliculas[i].length <= 120 ? sinopsis_peliculas[i] + '.. <a class="enlace_pelicula" href="/pelicula/'+id_peliculas[i]+'">más</a>' : sinopsis_peliculas[i].slice(0, 120) + '... <a class="enlace_pelicula" href="/pelicula/'+id_peliculas[i]+'">más</a>'}</p>
+                    <p class="nombre_pelicula">${nombre}</p>
+                </div>
+            `).join('');
+
+            const articulosPeliculas = `
+                <main>
+                    <article>
+                        <div class="articulos">
+                            ${peliculas}
+                        </div>
+                    </article>
+                </main>
             `;
+
             const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main>${articulosPeliculas}</main>`);
             res.status(200).send(paginaConNuevoContenido);
         }
         else {
-            const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main><h1>No hay películas</h1></main>`);
+            const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main><h1>Hay muchas películas con la busqueda: '${palabraPrimerosTresCaracteres}'</h1></main>`);
             res.status(404).send(paginaConNuevoContenido);
         }
-    });
-    // const { anio, ...resto } = req.query;
-    // console.log(req.query);
-    // console.log(resto);
-    // res.status(401).json({name: `Peliculas del año ${anio}`});
-}
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({
+            status: 500,
+            msg: 'Error'
+        });
+    }
+};
 
-const getPelicula = (req = request, res = response) => {  
-    const {id} = req.params;
-    //console.log(id);
-    //res.json({name: `Pelicula con ID: ${id}`});
-    
-    const nombre_peliculas = [];
-    const imagenes_peliculas = [];
-    const id_peliculas = [];
-    const sinopsis_peliculas = [];
-
-    const fs = require('fs');
-    fs.readFile('./data/peliculas.json', 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error al leer el archivo:', err);
-            res.status(500).send('Error al leer el archivo');
-            return;
-        }
-        // res.json(JSON.parse(data));
-
-        const jsonData = JSON.parse(data);
-        const nombres = jsonData.map(item => item.nombre);
-        const imagenes = jsonData.map(item => item.img);
-        const ids = jsonData.map(item => item.id);
-        const sinopsis = jsonData.map(item => item.sinopsis)
-
-        for (let i=0; i < 10; i++) {
-            nombre_peliculas.push(nombres[i]);
-            imagenes_peliculas.push(imagenes[i]);
-            id_peliculas.push(ids[i]);
-            sinopsis_peliculas.push(sinopsis[i]);
-        }
-
-        if (id in id_peliculas) {
-            res.json({"msg":"La película está en el JSON PELÍCULAS"});
-            //SE DEBE BUSCAR LA PELICULA POR EL ID EN EL JSON (está arriba).
-        }
-        else {
-            axios.get(`https://www.omdbapi.com/?apikey=${clave}&i=${id}`)
-            .then(({ data }) => {
-                res.json({data});
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        }
+const getPelicula = (req, res) => {  
+    const {id} = req.params; 
+    axios.get(`https://www.omdbapi.com/?apikey=${clave}&i=${id}`)
+    .then(({ data }) => {
+        res.json({data});
+    })
+    .catch((error) => {
+        console.log(error);
     });
 }
 
@@ -170,43 +214,43 @@ const buscarPeliculas = (req, res) => {
             }
 
             Promise.all(promesas)
-                .then(() => {
-                    if (nombre_peliculas.length > 0) {
-                        const peliculas = nombre_peliculas.map((nombre, i) => `
-                            <div id="${i}" class="contenedor">
-                                <a href="/pelicula/${id_peliculas[i]}">
-                                    <img src="${imagenes_peliculas[i]}" alt="${nombre}" width="225px" height="325px">
-                                </a>
-                                <p class="sinopsis_pelicula">${sinopsis_peliculas[i].length <= 120 ? sinopsis_peliculas[i] + '.. <a class="enlace_pelicula" href="/pelicula/'+id_peliculas[i]+'">más</a>' : sinopsis_peliculas[i].slice(0, 120) + '... <a class="enlace_pelicula" href="/pelicula/'+id_peliculas[i]+'">más</a>'}</p>
-                                <p class="nombre_pelicula">${nombre}</p>
-                            </div>
-                        `).join('');
+            .then(() => {
+                if (nombre_peliculas.length > 0) {
+                    const peliculas = nombre_peliculas.map((nombre, i) => `
+                        <div id="${i}" class="contenedor">
+                            <a href="/pelicula/${id_peliculas[i]}">
+                                <img src="${imagenes_peliculas[i]}" alt="${nombre}" width="225px" height="325px">
+                            </a>
+                            <p class="sinopsis_pelicula">${sinopsis_peliculas[i].length <= 120 ? sinopsis_peliculas[i] + '.. <a class="enlace_pelicula" href="/pelicula/'+id_peliculas[i]+'">más</a>' : sinopsis_peliculas[i].slice(0, 120) + '... <a class="enlace_pelicula" href="/pelicula/'+id_peliculas[i]+'">más</a>'}</p>
+                            <p class="nombre_pelicula">${nombre}</p>
+                        </div>
+                    `).join('');
 
-                        const articulosPeliculas = `
-                            <main>
-                                <article>
-                                    <div class="articulos">
-                                        ${peliculas}
-                                    </div>
-                                </article>
-                            </main>
-                        `;
+                    const articulosPeliculas = `
+                        <main>
+                            <article>
+                                <div class="articulos">
+                                    ${peliculas}
+                                </div>
+                            </article>
+                        </main>
+                    `;
 
-                        const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main>${articulosPeliculas}</main>`);
-                        res.status(200).send(paginaConNuevoContenido);
-                    }
-                    else {
-                        const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main><h1>Hay muchas películas con la busqueda: '${busqueda}'</h1></main>`);
-                        res.status(404).send(paginaConNuevoContenido);
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-                    res.status(400).json({
-                        status: 400,
-                        msg: 'Error'
-                    });
+                    const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main>${articulosPeliculas}</main>`);
+                    res.status(200).send(paginaConNuevoContenido);
+                }
+                else {
+                    const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main><h1>Hay muchas películas con la busqueda: '${busqueda}'</h1></main>`);
+                    res.status(404).send(paginaConNuevoContenido);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(400).json({
+                    status: 400,
+                    msg: 'Error'
                 });
+            });
         }
         else {
             const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main><h1>No hay películas con la búsqueda: ${busqueda}.</h1></main>`);

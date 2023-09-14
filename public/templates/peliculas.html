@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="caja_directores_boton">
-                    <button class="boton_directores">
+                    <button class="boton_directores" onclick="irADirectores()">
                         <p>Directores</p>
                     </button>
                 </div>
@@ -28,6 +28,29 @@
                     <button class="boton_generos">
                         <p>Géneros</p>
                     </button>
+                    <div class="generos-dropdown" id="generosDropdown">
+                        <div class="genero-item">
+                            <a href="/peliculas/aventura">Aventura</a>
+                        </div>
+                        <div class="genero-item">
+                            <a href="/peliculas/accion">Acción</a>
+                        </div>
+                        <div class="genero-item">
+                            <a href="/peliculas/comedia">Comedia</a>
+                        </div>
+                        <div class="genero-item">
+                            <a href="/peliculas/drama">Drama</a>
+                        </div>
+                        <div class="genero-item">
+                            <a href="/peliculas/cienciaficcion">Ciencia Ficción</a>
+                        </div>
+                        <div class="genero-item">
+                            <a href="/peliculas/suspenso">Suspense</a>
+                        </div>
+                        <div class="genero-item">
+                            <a href="/peliculas/animacion">Animación</a>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="buscador">
@@ -57,6 +80,10 @@
     <script>
         function irAPeliculas() {
             window.location.href = "/peliculas";
+        }
+
+        function irADirectores() {
+            window.location.href = "/peliculas/directores";
         }
     </script>
 </body>
