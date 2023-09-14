@@ -4,12 +4,7 @@ require('dotenv').config();
 
 const clave = process.env.API_KEY;
 
-const getPeliculas = (req = request, res = response) => {  
-    // const { anio, ...resto } = req.query;
-    // console.log(req.query);
-    // console.log(resto);
-    // res.status(401).json({name: `Peliculas del año ${anio}`});
-    
+const getPeliculas = (req = request, res = response) => {
     const nombre_peliculas = [];
     const imagenes_peliculas = [];
     const id_peliculas = [];
@@ -50,42 +45,28 @@ const getPeliculas = (req = request, res = response) => {
         `).join('');
 
         const paginaPrincipal = fs.readFileSync('./public/templates/peliculas.html', 'utf8');
-
-        const userAgent = req.headers['user-agent'];
-
-        if (userAgent.includes('Postman')) {
-            if (peliculas.length>0) {
-                const envioCompleto = {
-                    nombre_peliculas,
-                    imagenes_peliculas
-                }
-                res.status(200).json(envioCompleto);
-            }
-            else {
-                res.status(404).json({error: `No hay películas`});
-            }
+        if (peliculas.length>0) {
+            const articulosPeliculas =`
+            <main>
+                <article>
+                    <div class="articulos">
+                        ${peliculas}
+                    </div>
+                </article>
+            </main>
+            `;
+            const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main>${articulosPeliculas}</main>`);
+            res.status(200).send(paginaConNuevoContenido);
         }
         else {
-            if (peliculas.length>0) {
-                const articulosPeliculas =`
-                <main>
-                    <article>
-                        <div class="articulos">
-                            ${peliculas}
-                        </div>
-                    </article>
-                </main>
-                `;
-    
-                const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main>${articulosPeliculas}</main>`);
-                res.status(200).send(paginaConNuevoContenido);
-            }
-            else {
-                const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main><h1>No hay películas</h1></main>`);
-                res.status(404).send(paginaConNuevoContenido);
-            }
+            const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main><h1>No hay películas</h1></main>`);
+            res.status(404).send(paginaConNuevoContenido);
         }
     });
+    // const { anio, ...resto } = req.query;
+    // console.log(req.query);
+    // console.log(resto);
+    // res.status(401).json({name: `Peliculas del año ${anio}`});
 }
 
 const getPelicula = (req = request, res = response) => {  
@@ -276,7 +257,6 @@ const getOrigenNombre = (req = request, res = response) => {
         });
     });        
 }
-
 
 module.exports = {
     getPeliculas,
