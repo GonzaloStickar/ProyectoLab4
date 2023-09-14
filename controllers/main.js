@@ -150,17 +150,6 @@ const getPeliculas = async (req = request, res = response) => {
     }
 };
 
-const getPelicula = (req, res) => {  
-    const {id} = req.params; 
-    axios.get(`https://www.omdbapi.com/?apikey=${clave}&i=${id}`)
-    .then(({ data }) => {
-        res.json({data});
-    })
-    .catch((error) => {
-        console.log(error);
-    });
-}
-
 const buscarPeliculas = (req, res) => {
     const { busqueda } = req.body;
 
@@ -271,6 +260,41 @@ const buscarPeliculas = (req, res) => {
     
 };
 
+const getPelicula = (req, res) => {  
+    const {id} = req.params;
+
+    const fs = require('fs');
+    const paginaPrincipal = fs.readFileSync('./public/templates/peliculas.html', 'utf8');
+
+    axios.get(`https://www.omdbapi.com/?apikey=${clave}&i=${id}`)
+    .then(( response ) => {
+
+        const peli = response.data;
+
+        const pelicula = `
+            <main>
+                <article>
+                    <div class="info_pelicula">
+                        <p>${peli.Title}</p>
+                        <img src="${peli.Poster}" alt="${peli.Title}">
+                        <p>${peli.Plot}</p>
+                        ${peli.Director ? `<p><strong>Director: </strong> ${peli.Director}</p>` : ''}
+                        ${peli.Actors ? `<p><strong>Actores: </strong> ${peli.Actors}</p>` : ''}
+                        ${peli.Genre ? `<p><strong>Género: </strong> ${peli.Genre}</p>` : ''}
+                        ${peli.Year ? `<p><strong>Año: </strong> ${peli.Year}</p>` : ''}
+                    </div>
+                </article>
+            </main>
+        `;
+
+        const paginaConNuevoContenido = paginaPrincipal.replace(/<main>[\s\S]*<\/main>/, `<main>${pelicula}</main>`);
+        res.status(200).send(paginaConNuevoContenido);
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+}
+
 const getEstrenos = (req = request, res = response) => {
     res.json({name: 'Estrenos'});
 }
@@ -279,34 +303,10 @@ const getActores = (req = request, res = response) => {
     res.json({name: 'Actores'});
 }
 
-const getOrigenNombre = (req = request, res = response) => {
-    console.log(req.params);
-    const { name } = req.params;
-
-    axios.get(`https://api.nationalize.io/?name=${name}`)
-    .then(({ status, data, statusText }) => {
-        console.log({ status, data, statusText });
-        res.status(200).json({
-            status,
-            data,
-            statusText,
-            name
-        });
-    })
-    .catch((error)=>{
-        console.log(error);
-        res.status(400).json({
-            status:400,
-            msg: 'Error inesperado'
-        });
-    });        
-}
-
 module.exports = {
     getPeliculas,
     getEstrenos,
     getActores,
     getPelicula,
-    getOrigenNombre,
     buscarPeliculas
 };

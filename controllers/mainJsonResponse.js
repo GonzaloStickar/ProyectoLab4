@@ -203,7 +203,19 @@ const buscarPeliculasJson = (req, res) => {
     });
 }
 
+const getPeliculaJson = (req, res) => {  
+    const {id} = req.params; 
+    axios.get(`https://www.omdbapi.com/?apikey=${clave}&i=${id}`)
+    .then(({ data }) => {
+        res.json({data});
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+}
+
 module.exports = {
     getPeliculasJson,
-    buscarPeliculasJson
+    buscarPeliculasJson,
+    getPeliculaJson
 };
