@@ -92,12 +92,47 @@ const getPelicula = (req = request, res = response) => {
     const {id} = req.params;
     //console.log(id);
     //res.json({name: `Pelicula con ID: ${id}`});
-    axios.get(`https://www.omdbapi.com/?apikey=${clave}&i=${id}`)
-    .then(({ data }) => {
-        res.json({data});
-    })
-    .catch((error) => {
-        console.log(error);
+    
+    const nombre_peliculas = [];
+    const imagenes_peliculas = [];
+    const id_peliculas = [];
+    const sinopsis_peliculas = [];
+
+    const fs = require('fs');
+    fs.readFile('./data/peliculas.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error al leer el archivo:', err);
+            res.status(500).send('Error al leer el archivo');
+            return;
+        }
+        // res.json(JSON.parse(data));
+
+        const jsonData = JSON.parse(data);
+        const nombres = jsonData.map(item => item.nombre);
+        const imagenes = jsonData.map(item => item.img);
+        const ids = jsonData.map(item => item.id);
+        const sinopsis = jsonData.map(item => item.sinopsis)
+
+        for (let i=0; i < 10; i++) {
+            nombre_peliculas.push(nombres[i]);
+            imagenes_peliculas.push(imagenes[i]);
+            id_peliculas.push(ids[i]);
+            sinopsis_peliculas.push(sinopsis[i]);
+        }
+
+        if (id in id_peliculas) {
+            res.json({"msg":"La película está en el JSON PELÍCULAS"});
+            //SE DEBE BUSCAR LA PELICULA POR EL ID EN EL JSON (está arriba).
+        }
+        else {
+            axios.get(`https://www.omdbapi.com/?apikey=${clave}&i=${id}`)
+            .then(({ data }) => {
+                res.json({data});
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        }
     });
 }
 
