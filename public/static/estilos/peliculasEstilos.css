@@ -191,6 +191,10 @@ body {
     transition: box-shadow 0.3s;
 }
 
+.articulos img {
+    margin-bottom: -3px;
+}
+
 .articulos div .nombre_pelicula {
     text-align: center;
     bottom:1.25%;
