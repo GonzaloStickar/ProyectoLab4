@@ -165,6 +165,8 @@ body {
     background-image:url('../img/fondo.jpg');
     background-repeat:no-repeat;
     background-size:cover;
+    background-position: center;
+    background-attachment: fixed;
     font-family: "Roboto", sans-serif !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;      
@@ -311,4 +313,14 @@ footer a {
 
 footer a:hover {
     color: #fff;
+}
+
+@media (max-width: 760px) {
+    header {
+        height: 152.5px;
+    }
+    
+    header nav {
+        flex-direction: column;
+    }
 }

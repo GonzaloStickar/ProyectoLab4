@@ -12,9 +12,6 @@ function numeroRandom(min, max) {
 
 const getPeliculasJson = async (req, res) => {
     try {
-        const fs = require('fs');
-        const paginaPrincipal = fs.readFileSync('./public/templates/peliculas.html', 'utf8');
-
         const nombre_peliculas = [];
         const imagenes_peliculas = [];
         const sinopsis_peliculas = [];

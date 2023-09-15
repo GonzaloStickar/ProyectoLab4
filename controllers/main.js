@@ -57,15 +57,14 @@ const getPeliculas = async (req = request, res = response) => {
                     if (data.Poster != "N/A" && data.Title != "N/A") {
                         try {
                             await axios.get(data.Poster);
+                            nombre_peliculas.push(data.Title);
+                            imagenes_peliculas.push(data.Poster);
+                            id_peliculas.push(data.imdbID);
                         }
                         catch (posterError) {
                             console.log('Error al obtener el póster:', posterError.message);
                         }
-        
-                        nombre_peliculas.push(data.Title);
-                        imagenes_peliculas.push(data.Poster);
-                        id_peliculas.push(data.imdbID);
-        
+                        
                         try {
                             const { data: data2 } = await axios.get(`https://www.omdbapi.com/?apikey=${clave}&i=${data.imdbID}`);
                             
