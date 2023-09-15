@@ -317,10 +317,38 @@ footer a:hover {
 
 @media (max-width: 760px) {
     header {
-        height: 152.5px;
+        height: auto;
+        padding: 20px 0;
+        text-align: center;
     }
-    
+
     header nav {
         flex-direction: column;
+        align-items: center;
+    }
+
+    .caja_boton_inicio,
+    .caja_directores_boton,
+    .caja_generos_boton,
+    .buscador {
+        margin-bottom: 10px;
+    }
+
+    .buscador {
+        position: static;
+        margin-top: 0;
+    }
+
+    #input_texto {
+        margin-top: 0;
+    }
+
+    .boton_generos, .boton_directores, .boton_inicio {
+        width:160px;
+        border-radius: 5px;
+    }
+
+    .boton_inicio {
+        margin-right:7.75px;
     }
 }
