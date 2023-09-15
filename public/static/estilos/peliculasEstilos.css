@@ -192,7 +192,7 @@ body {
 }
 
 .articulos img {
-    margin-bottom: -3px;
+    margin-bottom: -3.5px;
 }
 
 .articulos div .nombre_pelicula {
@@ -292,7 +292,7 @@ main {
 footer {
     position: relative;
     margin-top: auto;
-    height: 35px;
+    height: auto;
     width: 100%;
     background: linear-gradient(90deg, rgb(66, 65, 65) 0%, rgba(16, 0, 1, 0.009) 100%);
     color: #fff;
