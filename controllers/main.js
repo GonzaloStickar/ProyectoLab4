@@ -302,10 +302,28 @@ const getActores = (req = request, res = response) => {
     res.json({name: 'Actores'});
 }
 
+const wrongRequest = (req = request, res = response) => {
+    const fs = require('fs');
+    const paginaPrincipal = fs.readFileSync('./public/templates/peliculas.html', 'utf8');
+    
+    const mensajePaginaNotFound = `
+        <div class="cajaPaginaNotFound">
+            <h1>Página no encontrada :(</h1>
+        </div>
+    `;
+
+    const paginaSinHeaderYFooter = paginaPrincipal
+    .replace(/<header>[\s\S]*<\/header>/, '')
+    .replace(/<footer>[\s\S]*<\/footer>/, '')
+    .replace(/<main>[\s\S]*<\/main>/, `<main>${mensajePaginaNotFound}</main>`);
+    res.status(200).send(paginaSinHeaderYFooter);
+}
+
 module.exports = {
     getPeliculas,
     getEstrenos,
     getActores,
     getPelicula,
-    buscarPeliculas
+    buscarPeliculas,
+    wrongRequest
 };

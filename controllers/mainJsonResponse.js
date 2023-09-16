@@ -211,8 +211,13 @@ const getPeliculaJson = (req, res) => {
     });
 }
 
+const wrongRequestJson = (req = request, res = response) => {
+    res.status(404).json({"Response":"404", "message":"Página no encontrada"});
+}
+
 module.exports = {
     getPeliculasJson,
     buscarPeliculasJson,
-    getPeliculaJson
+    getPeliculaJson,
+    wrongRequestJson
 };

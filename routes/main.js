@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const { getEstrenos, getPeliculas, getActores, getPelicula, getOrigenNombre, buscarPeliculas} = require('../controllers/main');
-const { getPeliculasJson, buscarPeliculasJson, getPeliculaJson } = require('../controllers/mainJsonResponse');
+const { getEstrenos, getPeliculas, getActores, getPelicula, buscarPeliculas, wrongRequest} = require('../controllers/main');
+const { getPeliculasJson, buscarPeliculasJson, getPeliculaJson, wrongRequestJson} = require('../controllers/mainJsonResponse');
 const { checkUserAgent } = require('./userAgentMiddleware');
 const bodyParser = require('body-parser');
 
@@ -48,5 +48,7 @@ rutas.get('/peliculas/:genero', (req, res) => {
             break;
     }
 });
+
+rutas.all('*', checkUserAgent(wrongRequest, wrongRequestJson));
 
 module.exports = rutas;
