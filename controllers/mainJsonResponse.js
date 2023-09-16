@@ -2,212 +2,113 @@ const axios = require('axios');
 const { request, response} = require('express');
 require('dotenv').config();
 
-const clave = process.env.API_KEY;
-
-function numeroRandom(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
-}
-
 const getPeliculasJson = async (req, res) => {
-    try {
-        const nombre_peliculas = [];
-        const imagenes_peliculas = [];
-        const sinopsis_peliculas = [];
-        const id_peliculas = [];
+    const nombre_peliculas = [];
+    const imagenes_peliculas = [];
+    const id_peliculas = [];
+    const sinopsis_peliculas = [];
 
-        const obtenerPalabraAleatoria = async () => {
-            try {
-                const response = await axios.get('https://www.palabrasque.com/palabra-aleatoria.php?Submit=Nueva+palabra');
-                if (response.status === 200) {
-                    const html = response.data;
-                    const regex = /<font data="palabra" size="6" \/><b>(\w+)<\/b><\/font>/;
-                    const match = html.match(regex);
-                    if (match) {
-                        return match[1];
-                    }
-                    else {
-                        console.log('No se encontró una palabra aleatoria en la página.');
-                        return obtenerPalabraAleatoria();
-                    }
-                }
-                else {
-                    console.log('Error al obtener la página:', response.status);
-                    return obtenerPalabraAleatoria();
-                }
-            }
-            catch (error) {
-                console.error(error);
-                throw error;
-            }
-        };
+    const fs = require('fs');
+    fs.readFile('./data/peliculas.json', 'utf8', (err, data) => {
 
-        const obtenerInfoPelicula = async (palabra) => {
-            const palabraSinPrimerCaracterYEnMinusculas = palabra.substring(1).toLowerCase();
-            const palabraPrimerosTresCaracteres = palabraSinPrimerCaracterYEnMinusculas.substring(0, numeroRandom(1, 7));
-        
-            try {
-                const { data } = await axios.get(`https://www.omdbapi.com/?t=${palabraPrimerosTresCaracteres}&apikey=${clave}`);
-                
-                if (data.Response === "True") {
-                    if (data.Poster != "N/A" && data.Title != "N/A") {
-                        try {
-                            await axios.get(data.Poster);
-                        }
-                        catch (posterError) {
-                            console.log('Error al obtener el póster:', posterError.message);
-                        }
-        
-                        nombre_peliculas.push(data.Title);
-                        imagenes_peliculas.push(data.Poster);
-                        id_peliculas.push(data.imdbID);
-        
-                        try {
-                            const { data: data2 } = await axios.get(`https://www.omdbapi.com/?apikey=${clave}&i=${data.imdbID}`);
-                            
-                            if (data2.Response !== 'False' && "Plot" in data2 && data2.Plot != "N/A") {
-                                sinopsis_peliculas.push(data2.Plot);
-                            }
-                            else {
-                                sinopsis_peliculas.push("Error al buscar una sinopsis / No se encontró una sinopsis");
-                            }
-                        }
-                        catch (omdbError) {
-                            console.log('Error al obtener información de la película desde OMDB:', omdbError.message);
-                        }
-                    }
-                    else {
-                        const nuevaPalabra = await obtenerPalabraAleatoria();
-                        if (nuevaPalabra) {
-                            return obtenerInfoPelicula(nuevaPalabra);
-                        }
-                    }
-                }
-                else {
-                    // Si la respuesta de OMDB es 'False' o 'Not Found', intenta con otra palabra aleatoria
-                    console.log(`La película '${palabraPrimerosTresCaracteres}' no se encontró en OMDB. Intentando con otra palabra.`);
-                    const nuevaPalabra = await obtenerPalabraAleatoria();
-                    if (nuevaPalabra) {
-                        return obtenerInfoPelicula(nuevaPalabra);
-                    }
-                }
-            }
-            catch (error) {
-                console.error(error);
-                throw error;
-            }
-        };
-        
-
-        const promesas = Array.from({ length: 10 }, async () => {
-            const palabra = await obtenerPalabraAleatoria();
-            if (palabra) {
-                return obtenerInfoPelicula(palabra);
-            }
-        });
-
-        await Promise.all(promesas);
-
-        const peliculas = [];
-
-        if (nombre_peliculas.length > 0) {
-            for (let i = 0; i < nombre_peliculas.length; i++) {
-                peliculas.push({
-                    nombre: nombre_peliculas[i],
-                    imagen: imagenes_peliculas[i],
-                    sinopsis: sinopsis_peliculas[i],
-                    id: id_peliculas[i]
-                });
-            }
-            res.status(200).json(peliculas);
-        }
-        else {
-            res.status(404).json({ message: 'No se encontraron películas' });
-        }
-    }
-    catch (error) {
-        console.error(error);
-        res.status(500).json({
-            status: 500,
-            msg: 'Error'
-        });
-    }
-}
-
-const buscarPeliculasJson = (req, res) => {
-    const clave = process.env.API_KEY;
-
-    const { busqueda } = req.body;
-    
-    axios.get(`https://www.omdbapi.com/?apikey=${clave}&s=${busqueda}`)
-    .then(({ data }) => {
-        if (data.Response === 'False') {
-            res.json(data);
+        if (err) {
+            console.error('Error al leer el archivo:', err);
+            res.status(500).send('Error al leer el archivo');
             return;
         }
 
-        const peliculas = data.Search;
+        const jsonData = JSON.parse(data);
+        const nombres = jsonData.map(item => item.nombre);
+        const imagenes = jsonData.map(item => item.img);
+        const ids = jsonData.map(item => item.id);
+        const sinopsis = jsonData.map(item => item.sinopsis);
 
-        function obtenerDetallesPelicula(imdbID) {
-            return axios.get(`https://www.omdbapi.com/?apikey=${clave}&i=${imdbID}`)
-                .then(({ data }) => {
-                    if (data.Response === 'True') {
-                        return data;
-                    }
-                    return null;
-                })
-                .catch((error) => {
-                    console.error(error);
-                    return null;
-                });
+        for (let i=0; i < 10; i++) {
+            nombre_peliculas.push(nombres[i]);
+            imagenes_peliculas.push(imagenes[i]);
+            id_peliculas.push(ids[i]);
+            sinopsis_peliculas.push(sinopsis[i]);
         }
-        const promesas = peliculas.map((pelicula) => {
-            if (!pelicula.Plot) {
-                return obtenerDetallesPelicula(pelicula.imdbID)
-                    .then((peliculaDetalles) => {
-                        if (peliculaDetalles && peliculaDetalles.Plot) {
-                            pelicula.Plot = peliculaDetalles.Plot;
-                        }
-                        else {
-                            pelicula.Plot = "No se encontró una sinópsis";
-                        }
-                        return pelicula;
-                    });
-            }
-            return movie;
-        });
 
-        Promise.all(promesas)
-            .then((peliculasActualizadas) => {
-                data.Search = peliculasActualizadas;
-                res.json(data);
-            })
-            .catch((error) => {
-                console.log(error);
-                res.status(400).json({
-                    status: 400,
-                    msg: 'Error'
-                });
-            });
-    })
-    .catch((error) => {
-        console.log(error);
-        res.status(400).json({
-            status: 400,
-            msg: 'Error'
-        });
+        res.status(200).json({
+        "nombre_peliculas":nombre_peliculas, 
+        "imagenes_peliculas":imagenes_peliculas, 
+        "id_peliculas":id_peliculas, 
+        "sinopsis_peliculas":sinopsis_peliculas});
     });
 }
 
-const getPeliculaJson = (req, res) => {  
-    const {id} = req.params; 
-    axios.get(`https://www.omdbapi.com/?apikey=${clave}&i=${id}`)
-    .then(({ data }) => {
-        res.json({data});
-    })
-    .catch((error) => {
-        console.log(error);
+const buscarPeliculasJson = (req, res) => {
+
+    const { busqueda } = req.body;
+    
+    const nombre_peliculas = [];
+    const imagenes_peliculas = [];
+    const id_peliculas = [];
+    const sinopsis_peliculas = [];
+
+    const fs = require('fs');
+    fs.readFile('./data/peliculas.json', 'utf8', (err, data) => {
+
+        if (err) {
+            console.error('Error al leer el archivo:', err);
+            res.status(500).send('Error al leer el archivo');
+            return;
+        }
+
+        const jsonData = JSON.parse(data);
+
+        jsonData.forEach(pelicula => {
+            const titulo = pelicula.nombre.toLowerCase();
+            const sinopsis = pelicula.sinopsis.toLowerCase();
+            const busquedaMinusculas = busqueda.toLowerCase();
+    
+            if ((titulo.includes(busquedaMinusculas) || sinopsis.includes(busquedaMinusculas)) && nombre_peliculas.length<10) {
+                nombre_peliculas.push(pelicula.nombre);
+                imagenes_peliculas.push(pelicula.img);
+                id_peliculas.push(pelicula.id);
+                sinopsis_peliculas.push(pelicula.sinopsis);
+            }
+        });
+
+        res.status(200).json({
+        "nombre_peliculas":nombre_peliculas, 
+        "imagenes_peliculas":imagenes_peliculas, 
+        "id_peliculas":id_peliculas, 
+        "sinopsis_peliculas":sinopsis_peliculas});
+    });
+}
+
+const getPeliculaJson = (req, res) => {
+
+    const { id } = req.params;
+
+    const fs = require('fs');
+
+    fs.readFile('./data/peliculas.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error al leer el archivo:', err);
+            res.status(500).send('Error al leer el archivo');
+            return;
+        }
+
+        const jsonData = JSON.parse(data);
+
+        const peliculaEncontrada = jsonData.find((peli) => peli.id === id);
+
+        if (peliculaEncontrada) {
+            res.status(200).json({
+            "nombre_pelicula":peliculaEncontrada.nombre, 
+            "imagen_pelicula":peliculaEncontrada.img, 
+            "anio_pelicula":peliculaEncontrada.anio, 
+            "sinopsis_pelicula":peliculaEncontrada.sinopsis
+            });
+        }
+        else {
+            res.status(404).json({
+            "Response":"No se encontró la película con ese id"
+            });
+        }
     });
 }
 
@@ -216,7 +117,75 @@ const wrongRequestJson = (req = request, res = response) => {
 }
 
 const getDirectoresJson = (req, res) => {
-    res.json({"hola":"hola"});
+
+    const fs = require('fs');
+    fs.readFile('./data/peliculas.json', 'utf8', (err, data) => {
+
+        if (err) {
+            console.error('Error al leer el archivo:', err);
+            res.status(500).send('Error al leer el archivo');
+            return;
+        }
+
+        const jsonData = JSON.parse(data);
+
+        const nombre_peliculas = [];
+        const directores_lista = [];
+
+        for (let i=0; i<10; i++) {
+            const peliculaAleatoria = jsonData[Math.floor(Math.random() * jsonData.length)];
+
+            const nombrePelicula = peliculaAleatoria.nombre;
+            const directorAleatorio = peliculaAleatoria.director;
+
+            nombre_peliculas.push(nombrePelicula)
+            directores_lista.push(directorAleatorio);
+        };
+
+        if (directores_lista.length > 0) {
+            res.status(404).json({
+            "nombre_peliculas":nombre_peliculas,
+            "directores_lista":directores_lista
+            });
+        }
+        else {
+            res.status(404).json({"Response:":"No se encontraron Directores"});
+        }
+    });
+}
+
+const getPeliculasGeneroJson = (res,req) => {
+    const fs = require('fs');
+    fs.readFile('./data/peliculas.json', 'utf8', (err, data) => {
+
+        if (err) {
+            console.error('Error al leer el archivo:', err);
+            res.status(500).send('Error al leer el archivo');
+            return;
+        }
+
+        const jsonData = JSON.parse(data);
+        const { genero } = req.params;
+        const generoBuscado = genero.toLowerCase();
+
+        const peliculasPorGenero = jsonData.filter((pelicula) => {
+            const generosPelicula = pelicula.genero.toLowerCase().split(', ').map(g => g.trim());
+            return generosPelicula.includes(generoBuscado);
+        });
+
+        if (peliculasPorGenero.length === 0) {
+            res.status(404).json({"Response":"No se encontraron películas con ese género"});
+        }
+        else {
+            const resultados = peliculasPorGenero.map((pelicula) => {
+                return {
+                    nombre: pelicula.nombre,
+                    director: pelicula.director
+                };
+            });
+            res.status(200).json({resultados});
+        }
+    });
 }
 
 module.exports = {
@@ -224,5 +193,6 @@ module.exports = {
     buscarPeliculasJson,
     getPeliculaJson,
     wrongRequestJson,
-    getDirectoresJson
+    getDirectoresJson,
+    getPeliculasGeneroJson
 };

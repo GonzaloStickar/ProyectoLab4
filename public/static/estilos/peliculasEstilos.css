@@ -180,6 +180,10 @@ body {
     flex-wrap:wrap;
 }
 
+.articulos img {
+    margin-bottom: -3.5px;
+}
+
 .articulos div {
     display:flex;
     position: relative;
@@ -393,8 +397,8 @@ body {
     margin: 20px;
 }
 
-.directores-container h6 h3 {
-    font-size: 40px;
+.directores-container h3 {
+    font-size: 20px;
     margin-bottom: 10px;
 }
 

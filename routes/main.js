@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const { getEstrenos, getPeliculas, getActores, getPelicula, buscarPeliculas, wrongRequest, getDirectores} = require('../controllers/main');
-const { getPeliculasJson, buscarPeliculasJson, getPeliculaJson, wrongRequestJson, getDirectoresJson} = require('../controllers/mainJsonResponse');
+const { getPeliculas, getPelicula, buscarPeliculas, wrongRequest, getDirectores, getPeliculasGenero} = require('../controllers/main');
+const { getPeliculasJson, buscarPeliculasJson, getPeliculaJson, wrongRequestJson, getDirectoresJson, getPeliculasGeneroJson} = require('../controllers/mainJsonResponse');
 const { checkUserAgent } = require('./userAgentMiddleware');
 const bodyParser = require('body-parser');
 
@@ -15,8 +15,6 @@ rutas.get('/', (req, res) => {
 rutas.get('/peliculas',checkUserAgent(getPeliculas, getPeliculasJson));
 rutas.get('/pelicula/:id', checkUserAgent(getPelicula, getPeliculaJson));
 
-rutas.get('/peliculas/estrenos', getEstrenos);
-rutas.get('/peliculas/actores', getActores);
 rutas.post('/peliculas/buscar', checkUserAgent(buscarPeliculas, buscarPeliculasJson));
 
 rutas.get('/peliculas/directores', async (req, res) => {
@@ -27,28 +25,28 @@ rutas.get('/peliculas/:genero', async (req, res) => {
     const genero = req.params.genero;
     switch (genero) {
         case 'aventura':
-            res.send('Página de películas de aventura');
+            checkUserAgent(getPeliculasGenero, getPeliculasGeneroJson)(req, res);
             break;
         case 'accion':
-            res.send('Página de películas de acción');
+            checkUserAgent(getPeliculasGenero, getPeliculasGeneroJson)(req, res);
             break;
         case 'comedia':
-            res.send('Página de películas de comedia');
+            checkUserAgent(getPeliculasGenero, getPeliculasGeneroJson)(req, res);
             break;
         case 'drama':
-            res.send('Página de películas de drama');
+            checkUserAgent(getPeliculasGenero, getPeliculasGeneroJson)(req, res);
             break;
         case 'cienciaficcion':
-            res.send('Página de películas de ciencia ficción');
+            checkUserAgent(getPeliculasGenero, getPeliculasGeneroJson)(req, res);
             break;
         case 'suspenso':
-            res.send('Página de películas de suspenso');
+            checkUserAgent(getPeliculasGenero, getPeliculasGeneroJson)(req, res);
             break;
         case 'animacion':
-            res.send('Página de películas de animación');
+            checkUserAgent(getPeliculasGenero, getPeliculasGeneroJson)(req, res);
             break;
         case 'directores':
-            await getDirectores(req, res);
+            checkUserAgent(getDirectores, getDirectoresJson)(req, res);
         default:
             checkUserAgent(wrongRequest, wrongRequestJson)(req,res);
             break;
