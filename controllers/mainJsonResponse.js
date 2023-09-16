@@ -215,9 +215,14 @@ const wrongRequestJson = (req = request, res = response) => {
     res.status(404).json({"Response":"404", "message":"Página no encontrada"});
 }
 
+const getDirectoresJson = (req, res) => {
+    res.json({"hola":"hola"});
+}
+
 module.exports = {
     getPeliculasJson,
     buscarPeliculasJson,
     getPeliculaJson,
-    wrongRequestJson
+    wrongRequestJson,
+    getDirectoresJson
 };

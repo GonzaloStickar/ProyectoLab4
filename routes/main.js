@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const { getEstrenos, getPeliculas, getActores, getPelicula, buscarPeliculas, wrongRequest} = require('../controllers/main');
-const { getPeliculasJson, buscarPeliculasJson, getPeliculaJson, wrongRequestJson} = require('../controllers/mainJsonResponse');
+const { getEstrenos, getPeliculas, getActores, getPelicula, buscarPeliculas, wrongRequest, getDirectores} = require('../controllers/main');
+const { getPeliculasJson, buscarPeliculasJson, getPeliculaJson, wrongRequestJson, getDirectoresJson} = require('../controllers/mainJsonResponse');
 const { checkUserAgent } = require('./userAgentMiddleware');
 const bodyParser = require('body-parser');
 
@@ -19,7 +19,11 @@ rutas.get('/peliculas/estrenos', getEstrenos);
 rutas.get('/peliculas/actores', getActores);
 rutas.post('/peliculas/buscar', checkUserAgent(buscarPeliculas, buscarPeliculasJson));
 
-rutas.get('/peliculas/:genero', (req, res) => {
+rutas.get('/peliculas/directores', async (req, res) => {
+    await getDirectores(req, res);
+});
+
+rutas.get('/peliculas/:genero', async (req, res) => {
     const genero = req.params.genero;
     switch (genero) {
         case 'aventura':
@@ -43,8 +47,10 @@ rutas.get('/peliculas/:genero', (req, res) => {
         case 'animacion':
             res.send('Página de películas de animación');
             break;
+        case 'directores':
+            await getDirectores(req, res);
         default:
-            res.status(404).send('Género no encontrado.');
+            checkUserAgent(wrongRequest, wrongRequestJson)(req,res);
             break;
     }
 });

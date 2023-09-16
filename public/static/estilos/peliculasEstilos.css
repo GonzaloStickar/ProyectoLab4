@@ -4,6 +4,11 @@
     font-family:'Franklin Gothic Medium', 'Verdana', Arial, sans-serif !important;
 }
 
+html {
+    min-height: 100%;
+    position: relative;
+}
+
 header {
     height: 50px;
     width: 100%;
@@ -166,8 +171,6 @@ body {
     background-position: center;
     background-attachment: fixed;
     font-family: "Roboto", sans-serif !important;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;      
 }
 
 .articulos {
@@ -284,9 +287,8 @@ main {
 }
 
 footer {
-    position: relative;
-    margin-top: auto;
-    height: 35px;
+    position: absolute;
+    bottom: 0;
     width: 100%;
     background: linear-gradient(90deg, rgb(66, 65, 65) 0%, rgba(16, 0, 1, 0.009) 100%);
     color: #fff;
@@ -295,7 +297,6 @@ footer {
 }
 
 footer p {
-    padding-top: 6px;
     text-align: center;
     font-family: Be Vietnam Pro, sans-serif;
     color: #fff;
@@ -350,6 +351,12 @@ footer a:hover {
         margin-right:7.75px;
     }
 }
+body {
+    display:grid;
+    min-height: calc(100vh - 100px - 300px);
+    grid-template-rows: auto 1fr auto;
+    margin-bottom: 60px;
+}
 
 .cajaPaginaNotFound {
     position: absolute;
@@ -373,4 +380,47 @@ footer a:hover {
 
 .cajaPaginaNotFound h1 {
     font-size: 37.5px;
+}
+
+
+
+.directores-container {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+.directores-container h6 h3 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.directores-list {
+    list-style: none;
+    padding: 0;
+}
+
+.caja_directores {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 0;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.caja_directores p {
+    font-size: 16px;
+    margin: 0;
+}
+
+.directoresDiv {
+    display:flex;
+    align-items:center;
+    justify-content: space-evenly;
+    flex-wrap:wrap;
 }
