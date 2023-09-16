@@ -18,10 +18,13 @@ const getPeliculasJson = async (req, res) => {
         }
 
         const jsonData = JSON.parse(data);
-        const nombres = jsonData.map(item => item.nombre);
-        const imagenes = jsonData.map(item => item.img);
-        const ids = jsonData.map(item => item.id);
-        const sinopsis = jsonData.map(item => item.sinopsis);
+        
+        const ultimasPeliculas = jsonData.slice(-10);
+        
+        const nombres = ultimasPeliculas.map(item => item.nombre);
+        const imagenes = ultimasPeliculas.map(item => item.img);
+        const ids = ultimasPeliculas.map(item => item.id);
+        const sinopsis = ultimasPeliculas.map(item => item.sinopsis);
 
         for (let i=0; i < 10; i++) {
             nombre_peliculas.push(nombres[i]);
@@ -154,10 +157,9 @@ const getDirectoresJson = (req, res) => {
     });
 }
 
-const getPeliculasGeneroJson = (res,req) => {
+const getPeliculasGeneroJson = (req, res) => {
     const fs = require('fs');
     fs.readFile('./data/peliculas.json', 'utf8', (err, data) => {
-
         if (err) {
             console.error('Error al leer el archivo:', err);
             res.status(500).send('Error al leer el archivo');
@@ -188,11 +190,16 @@ const getPeliculasGeneroJson = (res,req) => {
     });
 }
 
+const wrongRequestGeneroJson = (req = request, res = response) => {
+    req.status(404).json({"Response:":"Género no encontrado"})
+}
+
 module.exports = {
     getPeliculasJson,
     buscarPeliculasJson,
     getPeliculaJson,
     wrongRequestJson,
     getDirectoresJson,
-    getPeliculasGeneroJson
+    getPeliculasGeneroJson,
+    wrongRequestGeneroJson
 };

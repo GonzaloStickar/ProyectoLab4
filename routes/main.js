@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const { getPeliculas, getPelicula, buscarPeliculas, wrongRequest, getDirectores, getPeliculasGenero} = require('../controllers/main');
-const { getPeliculasJson, buscarPeliculasJson, getPeliculaJson, wrongRequestJson, getDirectoresJson, getPeliculasGeneroJson} = require('../controllers/mainJsonResponse');
+const { getPeliculas, getPelicula, buscarPeliculas, wrongRequest, getDirectores, getPeliculasGenero, wrongRequestGenero} = require('../controllers/main');
+const { getPeliculasJson, buscarPeliculasJson, getPeliculaJson, wrongRequestJson, getDirectoresJson, getPeliculasGeneroJson, wrongRequestGeneroJson} = require('../controllers/mainJsonResponse');
 const { checkUserAgent } = require('./userAgentMiddleware');
 const bodyParser = require('body-parser');
 
@@ -18,7 +18,7 @@ rutas.get('/pelicula/:id', checkUserAgent(getPelicula, getPeliculaJson));
 rutas.post('/peliculas/buscar', checkUserAgent(buscarPeliculas, buscarPeliculasJson));
 
 rutas.get('/peliculas/directores', async (req, res) => {
-    await getDirectores(req, res);
+    checkUserAgent(getDirectores, getDirectoresJson)(req, res);
 });
 
 rutas.get('/peliculas/:genero', async (req, res) => {
@@ -48,7 +48,7 @@ rutas.get('/peliculas/:genero', async (req, res) => {
         case 'directores':
             checkUserAgent(getDirectores, getDirectoresJson)(req, res);
         default:
-            checkUserAgent(wrongRequest, wrongRequestJson)(req,res);
+            checkUserAgent(wrongRequestGenero, wrongRequestGeneroJson)(req,res);
             break;
     }
 });

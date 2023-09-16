@@ -19,10 +19,13 @@ const getPeliculas = (req = request, res = response) => {
         }
 
         const jsonData = JSON.parse(data);
-        const nombres = jsonData.map(item => item.nombre);
-        const imagenes = jsonData.map(item => item.img);
-        const ids = jsonData.map(item => item.id);
-        const sinopsis = jsonData.map(item => item.sinopsis);
+
+        const ultimasPeliculas = jsonData.slice(-10);
+        
+        const nombres = ultimasPeliculas.map(item => item.nombre);
+        const imagenes = ultimasPeliculas.map(item => item.img);
+        const ids = ultimasPeliculas.map(item => item.id);
+        const sinopsis = ultimasPeliculas.map(item => item.sinopsis);
 
         for (let i=0; i < 10; i++) {
             nombre_peliculas.push(nombres[i]);
@@ -326,11 +329,27 @@ const getPeliculasGenero = (req,res) => {
     });
 }
 
+const wrongRequestGenero = (req = request, res = response) => {
+    const fs = require('fs');
+    const paginaPrincipal = fs.readFileSync('./public/templates/peliculas.html', 'utf8');
+    
+    const mensajePaginaNotFound = `
+        <div class="cajaPaginaNotFound">
+            <h1>Género no encontrado :(</h1>
+        </div>
+    `;
+
+    const paginaModificada = paginaPrincipal
+    .replace(/<main>[\s\S]*<\/main>/, `<main>${mensajePaginaNotFound}</main>`);
+    res.status(200).send(paginaModificada);
+}
+
 module.exports = {
     getPeliculas,
     getPelicula,
     buscarPeliculas,
     wrongRequest,
     getDirectores,
-    getPeliculasGenero
+    getPeliculasGenero,
+    wrongRequestGenero
 };
