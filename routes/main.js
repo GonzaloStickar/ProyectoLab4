@@ -36,12 +36,6 @@ rutas.get('/peliculas/:genero', async (req, res) => {
         case 'drama':
             checkUserAgent(getPeliculasGenero, getPeliculasGeneroJson)(req, res);
             break;
-        case 'cienciaficcion':
-            checkUserAgent(getPeliculasGenero, getPeliculasGeneroJson)(req, res);
-            break;
-        case 'suspenso':
-            checkUserAgent(getPeliculasGenero, getPeliculasGeneroJson)(req, res);
-            break;
         case 'animacion':
             checkUserAgent(getPeliculasGenero, getPeliculasGeneroJson)(req, res);
             break;

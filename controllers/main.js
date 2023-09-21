@@ -256,8 +256,6 @@ const buscarPeliculas = (req, res) => {
             `;
 
             const paginaSinHeaderYFooter = paginaPrincipal
-            .replace(/<header>[\s\S]*<\/header>/, '')
-            .replace(/<footer>[\s\S]*<\/footer>/, '')
             .replace(/<main>[\s\S]*<\/main>/, `<main>${mensajePaginaNotFound}</main>`);
             res.status(200).send(paginaSinHeaderYFooter);
         }
@@ -363,8 +361,10 @@ const getDirectores = async (req, res) => {
 
                 if (data.Response === "True") {
                     if ("Title" in data && "Director" in data && data.Director !== "N/A" && data.Title !== "N/A") {
-                        nombre_peliculas.push(data.Title);
-                        directores_lista.push(data.Director);
+                        if (!(nombre_peliculas.includes(data.Title))) {
+                            nombre_peliculas.push(data.Title);
+                            directores_lista.push(data.Director);
+                        }
                     }
                     else {
                         const nuevaPalabra = await obtenerPalabraAleatoria();
@@ -425,8 +425,6 @@ const getDirectores = async (req, res) => {
             `;
     
             const paginaSinHeaderYFooter = paginaPrincipal
-            .replace(/<header>[\s\S]*<\/header>/, '')
-            .replace(/<footer>[\s\S]*<\/footer>/, '')
             .replace(/<main>[\s\S]*<\/main>/, `<main>${mensajePaginaNotFound}</main>`);
             res.status(200).send(paginaSinHeaderYFooter);
         }
@@ -444,6 +442,25 @@ const getPeliculasGenero = async (req,res) => {
 
     const { genero } = req.params;
     const generoBuscado = genero.toLowerCase();
+    let generoBuscadoEnglish = "";
+
+    switch (generoBuscado) {
+        case 'aventura':
+            generoBuscadoEnglish = "Adventure";
+            break;
+        case 'accion':
+            generoBuscadoEnglish = "Action";
+            break;
+        case 'comedia':
+            generoBuscadoEnglish = "Comedy";
+            break;
+        case 'drama':
+            generoBuscadoEnglish = "Drama";
+            break;
+        case 'animacion':
+            generoBuscadoEnglish = "Animation";
+            break;
+    }
     
     const paginaPrincipal = fs.readFileSync('./public/templates/peliculas.html', 'utf8');
 
@@ -485,8 +502,14 @@ const getPeliculasGenero = async (req,res) => {
 
                 if (data.Response === "True") {
                     if ("Title" in data && "Genre" in data && data.Genre !== "N/A" && data.Title !== "N/A") {
-                        nombre_peliculas.push(data.Title);
-                        generos_lista.push(data.Genre);
+                        const generos = data.Genre.toLowerCase().split(', ');
+
+                        if (generos.includes(generoBuscadoEnglish.toLocaleLowerCase())) {
+                            if (!(nombre_peliculas.includes(data.Title))) {
+                                nombre_peliculas.push(data.Title);
+                                generos_lista.push(data.Genre);
+                            }
+                        }
                     }
                     else {
                         const nuevaPalabra = await obtenerPalabraAleatoria();
@@ -521,7 +544,7 @@ const getPeliculasGenero = async (req,res) => {
         if (generos_lista.length > 0) {
             const generos = generos_lista.map((genero, i) => `
             <div class="directores-container">
-                <h3>Director de la película: ${nombre_peliculas[i]}</h3>
+                <h3>Géneros de la película: ${nombre_peliculas[i]}</h3>
                 <ul class="directores-list">
                     <h3>${genero}<h3>
                 </ul>
@@ -542,13 +565,11 @@ const getPeliculasGenero = async (req,res) => {
         else {
             const mensajePaginaNotFound = `
                 <div class="cajaPaginaNotFound">
-                    <h1>No se encontraron Directores :(</h1>
+                    <h1>No se encontraron Películas con ese género :(</h1>
                 </div>
             `;
     
             const paginaSinHeaderYFooter = paginaPrincipal
-            .replace(/<header>[\s\S]*<\/header>/, '')
-            .replace(/<footer>[\s\S]*<\/footer>/, '')
             .replace(/<main>[\s\S]*<\/main>/, `<main>${mensajePaginaNotFound}</main>`);
             res.status(200).send(paginaSinHeaderYFooter);
         }
