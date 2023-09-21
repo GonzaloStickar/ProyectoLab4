@@ -392,9 +392,17 @@ body {
     background-color: #f7f7f7;
     padding: 20px;
     border: 1px solid #ddd;
-    border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 20px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+}
+
+.directores-container:hover {
+    -webkit-transform: scale(1.125);
+    transform: scale(1.125);
 }
 
 .directores-container h3 {
