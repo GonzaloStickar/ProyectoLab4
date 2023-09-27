@@ -282,9 +282,10 @@ const getPelicula = (req, res) => {
         const pelicula = `
             <main>
                 <article>
+                  
                     <div class="info_pelicula">
-                        <p>${peli.Title && peli.Title !== "N/A" ? peli.Title : 'Título no disponible'}</p>
                         <img src="${peli.Poster && peli.Poster !== "N/A" ? peli.Poster : 'Póster no disponible'}" alt="${peli.Title}">
+                        <p>${peli.Title && peli.Title !== "N/A" ? peli.Title : 'Título no disponible'}</p>
                         <p>${peli.Plot && peli.Plot !== "N/A" ? peli.Plot : 'Trama no disponible'}</p>
                         ${peli.Director && peli.Director !== "N/A" ? `<p><strong>Director: </strong> ${peli.Director}</p>` : ''}
                         ${peli.Actors && peli.Actors !== "N/A" ? `<p><strong>Actores: </strong> ${peli.Actors}</p>` : ''}
