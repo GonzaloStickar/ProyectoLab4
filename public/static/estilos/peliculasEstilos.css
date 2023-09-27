@@ -436,3 +436,12 @@ body {
     justify-content: space-evenly;
     flex-wrap:wrap;
 }
+.info_pelicula{
+    color: whitesmoke;
+    font-family: 'Segoe UI';
+    background-color: #080f28;
+    margin: 2%;
+    padding: 2%;
+    border: 3px solid whitesmoke;
+    border-radius: 20px;
+}
