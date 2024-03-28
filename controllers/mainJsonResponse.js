@@ -366,7 +366,7 @@ const getPeliculasGeneroJson = async (req, res) => {
 }
 
 const wrongRequestGeneroJson = (req = request, res = response) => {
-    req.status(404).json({"Response:":"Género no encontrado"})
+    res.status(404).json({"Response:":"Género no encontrado"})
 }
 
 module.exports = {
