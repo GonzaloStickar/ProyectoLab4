@@ -21,27 +21,17 @@ rutas.get('/peliculas/directores', async (req, res) => {
     checkUserAgent(getDirectores, getDirectoresJson)(req, res);
 });
 
-rutas.get('/peliculas/:genero', async (req, res) => {
-    const opcion = req.params.genero;
+rutas.get('/peliculas/genero/:nombreGenero', async (req, res) => {
+    const opcion = req.params.nombreGenero;
     const opcionBuscada = opcion.toLowerCase();
     switch (opcionBuscada) {
         case 'aventura':
-            checkUserAgent(getPeliculasGenero, getPeliculasGeneroJson)(req, res);
-            break;
         case 'accion':
-            checkUserAgent(getPeliculasGenero, getPeliculasGeneroJson)(req, res);
-            break;
         case 'comedia':
-            checkUserAgent(getPeliculasGenero, getPeliculasGeneroJson)(req, res);
-            break;
         case 'drama':
-            checkUserAgent(getPeliculasGenero, getPeliculasGeneroJson)(req, res);
-            break;
         case 'animacion':
             checkUserAgent(getPeliculasGenero, getPeliculasGeneroJson)(req, res);
             break;
-        case 'directores':
-            checkUserAgent(getDirectores, getDirectoresJson)(req, res);
         default:
             checkUserAgent(wrongRequestGenero, wrongRequestGeneroJson)(req,res);
             break;
