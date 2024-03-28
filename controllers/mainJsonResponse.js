@@ -187,22 +187,34 @@ const buscarPeliculasJson = (req, res) => {
     });
 }
 
-const getPeliculaJson = (req, res) => {
+const getPeliculaJson = async (req, res) => {
+    try {
+        const { id } = req.params;
 
-    const { id } = req.params;
+        const pelicula = await axios.get(`https://www.omdbapi.com/?apikey=${clave}&i=${id}`);
 
-    axios.get(`https://www.omdbapi.com/?apikey=${clave}&i=${id}`)
-    .then(( response ) => {
-        const peli = response.data;
-        res.status(200).json({peli});
-    })
-    .catch((error) => {
-        console.log(error);
-    });
-}
+        if (pelicula.data && pelicula.data.Response === "True") {
+            res.status(200).json(pelicula.data);
+        } else {
+            res.status(404).json({
+                "Response": "404",
+                "message": "No se encontró la película con ese ID"
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            "Response": "500",
+            "message": "Error interno del servidor"
+        });
+    }
+};
 
 const wrongRequestJson = (req = request, res = response) => {
-    res.status(404).json({"Response":"404", "message":"Página no encontrada"});
+    res.status(404).json({
+        "Response": "404",
+        "message": "WrongRequest (URL no existente)"
+    });
 }
 
 const getDirectoresJson = async (req, res) => {
@@ -259,7 +271,10 @@ const getDirectoresJson = async (req, res) => {
             });
         }
         else {
-            res.status(404).json({"Response:":"No se encontraron Directores"});
+            res.status(404).json({
+                "Response": "404",
+                "message": "No se encontraron Directores"
+            });
         }
     }
     catch (error) {
@@ -353,7 +368,10 @@ const getPeliculasGeneroJson = async (req, res) => {
             });
         }
         else {
-            res.status(404).json({"Error":"No se encontraron peliculas con ese género"});
+            res.status(404).json({
+                "Response": "404",
+                "message": "Película no encontrada con ese género"
+            });
         }
     }
     catch (error) {
@@ -366,7 +384,10 @@ const getPeliculasGeneroJson = async (req, res) => {
 }
 
 const wrongRequestGeneroJson = (req = request, res = response) => {
-    res.status(404).json({"Response:":"Género no encontrado"})
+    res.status(404).json({
+        "Response": "404",
+        "message": "Género no encontrado"
+    })
 }
 
 module.exports = {
