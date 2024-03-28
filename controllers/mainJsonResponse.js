@@ -1,14 +1,15 @@
 const axios = require('axios');
 const { request, response} = require('express');
 require('dotenv').config();
+const fs = require('fs');
+const palabrasTresCaracteres = JSON.parse(fs.readFileSync('./controllers/palabras.json'));
 
 const clave = process.env.API_KEY;
 
-function numeroRandom(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
-}
+const obtenerPalabraAleatoria = () => {
+    const randomIndex = Math.floor(Math.random() * palabrasTresCaracteres.length);
+    return palabrasTresCaracteres[randomIndex];
+};
 
 const getPeliculasJson = async (req, res) => {
 
@@ -18,36 +19,10 @@ const getPeliculasJson = async (req, res) => {
         const sinopsis_peliculas = [];
         const id_peliculas = [];
 
-        const obtenerPalabraAleatoria = async () => {
+        const obtenerInfoPelicula = async () => {
             try {
-                const response = await axios.get('https://www.palabrasque.com/palabra-aleatoria.php?Submit=Nueva+palabra');
-                if (response.status === 200) {
-                    const html = response.data;
-                    const regex = /<font data="palabra" size="6" \/><b>(\w+)<\/b><\/font>/;
-                    const match = html.match(regex);
-                    if (match) {
-                        return match[1];
-                    }
-                    else {
-                        console.log('No se encontró una palabra aleatoria en la página.');
-                        return obtenerPalabraAleatoria();
-                    }
-                }
-                else {
-                    console.log('Error al obtener la página:', response.status);
-                    return obtenerPalabraAleatoria();
-                }
-            }
-            catch (error) {
-                console.error(error);
-                throw error;
-            }
-        };
-        const obtenerInfoPelicula = async (palabra) => {
-            const palabraSinPrimerCaracterYEnMinusculas = palabra.substring(1).toLowerCase();
-            const palabraPrimerosTresCaracteres = palabraSinPrimerCaracterYEnMinusculas.substring(0, numeroRandom(1, 7));
+                const palabraPrimerosTresCaracteres = obtenerPalabraAleatoria();
 
-            try {
                 const { data } = await axios.get(`https://www.omdbapi.com/?t=${palabraPrimerosTresCaracteres}&apikey=${clave}`);
 
                 if (data.Response === "True") {
@@ -236,37 +211,11 @@ const getDirectoresJson = async (req, res) => {
         const directores_lista = [];
         const nombre_peliculas = [];
 
-        const obtenerPalabraAleatoria = async () => {
+        const obtenerInfoPelicula = async () => {
             try {
-                const response = await axios.get('https://www.palabrasque.com/palabra-aleatoria.php?Submit=Nueva+palabra');
-                if (response.status === 200) {
-                    const html = response.data;
-                    const regex = /<font data="palabra" size="6" \/><b>(\w+)<\/b><\/font>/;
-                    const match = html.match(regex);
-                    if (match) {
-                        return match[1];
-                    }
-                    else {
-                        console.log('No se encontró una palabra aleatoria en la página.');
-                        return obtenerPalabraAleatoria();
-                    }
-                }
-                else {
-                    console.log('Error al obtener la página:', response.status);
-                    return obtenerPalabraAleatoria();
-                }
-            }
-            catch (error) {
-                console.error(error);
-                throw error;
-            }
-        };
-        const obtenerInfoPelicula = async (palabra) => {
-            const palabraSinPrimerCaracterYEnMinusculas = palabra.substring(1).toLowerCase();
-            const palabraPrimerosTresCaracteres = palabraSinPrimerCaracterYEnMinusculas.substring(0, numeroRandom(1, 7));
+                const palabra = obtenerPalabraAleatoria();
 
-            try {
-                const { data } = await axios.get(`https://www.omdbapi.com/?t=${palabraPrimerosTresCaracteres}&apikey=${clave}`);
+                const { data } = await axios.get(`https://www.omdbapi.com/?t=${palabra}&apikey=${clave}`);
 
                 if (data.Response === "True") {
                     if ("Title" in data && "Director" in data && data.Director !== "N/A" && data.Title !== "N/A") {
@@ -282,7 +231,7 @@ const getDirectoresJson = async (req, res) => {
                 }
                 else {
                     // Si la respuesta de OMDB es 'False' o 'Not Found', intenta con otra palabra aleatoria
-                    console.log(`La película '${palabraPrimerosTresCaracteres}' no se encontró en OMDB. Intentando con otra palabra.`);
+                    console.log(`La película '${palabra}' no se encontró en OMDB. Intentando con otra palabra.`);
                     const nuevaPalabra = await obtenerPalabraAleatoria();
                     if (nuevaPalabra) {
                         return obtenerInfoPelicula(nuevaPalabra);
@@ -350,36 +299,10 @@ const getPeliculasGeneroJson = async (req, res) => {
         const generos_lista = [];
         const nombre_peliculas = [];
 
-        const obtenerPalabraAleatoria = async () => {
-            try {
-                const response = await axios.get('https://www.palabrasque.com/palabra-aleatoria.php?Submit=Nueva+palabra');
-                if (response.status === 200) {
-                    const html = response.data;
-                    const regex = /<font data="palabra" size="6" \/><b>(\w+)<\/b><\/font>/;
-                    const match = html.match(regex);
-                    if (match) {
-                        return match[1];
-                    }
-                    else {
-                        console.log('No se encontró una palabra aleatoria en la página.');
-                        return obtenerPalabraAleatoria();
-                    }
-                }
-                else {
-                    console.log('Error al obtener la página:', response.status);
-                    return obtenerPalabraAleatoria();
-                }
-            }
-            catch (error) {
-                console.error(error);
-                throw error;
-            }
-        };
         const obtenerInfoPelicula = async (palabra) => {
-            const palabraSinPrimerCaracterYEnMinusculas = palabra.substring(1).toLowerCase();
-            const palabraPrimerosTresCaracteres = palabraSinPrimerCaracterYEnMinusculas.substring(0, numeroRandom(1, 7));
-
             try {
+                const palabraPrimerosTresCaracteres = obtenerPalabraAleatoria();
+
                 const { data } = await axios.get(`https://www.omdbapi.com/?t=${palabraPrimerosTresCaracteres}&apikey=${clave}`);
 
                 if (data.Response === "True") {
