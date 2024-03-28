@@ -4,7 +4,7 @@
 - Facundo Elizalde
 - Luciano Cossia
 #  
-Documentación:
+Documentación de rutas:
 
 /peliculas
 
@@ -13,9 +13,13 @@ Documentación:
 /peliculas/directores
 
 /peliculas/aventura
+
 /peliculas/accion
+
 /peliculas/comedia
+
 /peliculas/drama
+
 /peliculas/animacion
 
 /pelicula/id
