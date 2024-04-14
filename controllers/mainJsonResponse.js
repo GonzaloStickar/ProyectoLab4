@@ -288,11 +288,10 @@ const getDirectoresJson = async (req, res) => {
 
 const getPeliculasGeneroJson = async (req, res) => {
 
-    const { genero } = req.params;
-    const generoBuscado = genero.toLowerCase();
+    const { nombreGenero } = req.params;
     let generoBuscadoEnglish = "";
 
-    switch (generoBuscado) {
+    switch (nombreGenero) {
         case 'aventura':
             generoBuscadoEnglish = "Adventure";
             break;
