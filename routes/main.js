@@ -23,8 +23,7 @@ rutas.get('/peliculas/directores', async (req, res) => {
 
 rutas.get('/peliculas/genero/:nombreGenero', async (req, res) => {
     const opcion = req.params.nombreGenero;
-    const opcionBuscada = opcion.toLowerCase();
-    switch (opcionBuscada) {
+    switch (opcion) {
         case 'aventura':
         case 'accion':
         case 'comedia':
